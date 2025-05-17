@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mt. Prevost Takeoff",
+        "type": "takeoff",
+        "description": "Popular takeoff near Duncan."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.793, 48.843]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cowichan Valley Landing",
+        "type": "landing",
+        "description": "Landing zone in the Cowichan Valley."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.73, 48.805]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mt. Tzouhalem Takeoff",
+        "type": "takeoff",
+        "description": "Another takeoff near Duncan."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.635, 48.809]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nanaimo Landing Zone",
+        "type": "landing",
+        "description": "Landing zone in Nanaimo area."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-124.05, 49.18]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Victoria Area Takeoff",
+        "type": "takeoff",
+        "description": "Takeoff point near Victoria."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.5, 48.5]
+      }
+    }
+  ]
+}

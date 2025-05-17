@@ -1,0 +1,15 @@
+{
+  "hash": "c4c49a0f",
+  "configHash": "7a27e4a5",
+  "lockfileHash": "07a58245",
+  "browserHash": "60a8585d",
+  "optimized": {
+    "cesium": {
+      "src": "../../../node_modules/.pnpm/cesium@1.129.0/node_modules/cesium/Source/Cesium.js",
+      "file": "cesium.js",
+      "fileHash": "d921dbf6",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
