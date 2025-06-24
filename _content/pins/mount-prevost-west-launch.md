@@ -6,5 +6,5 @@ location:
   longitude: 2
   elevation: 3
 areas:
-  - _content/areas/2025-06-24-mount-prevost.md
+  - _content/areas/mount-prevost.md
 ---
