@@ -24,6 +24,7 @@ content:
     label: Areas
     type: collection
     path: '_content/areas'
+    filename: '{primary}.md'
     view:
       fields: [ title, published, date ]
     fields:
@@ -45,6 +46,7 @@ content:
   - name: pins
     label: Pins
     path: _content/pins
+    filename: '{primary}.md'
     type: collection
     fields:
       - name: published
