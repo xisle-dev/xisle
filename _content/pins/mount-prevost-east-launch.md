@@ -1,5 +1,6 @@
 ---
 published: true
+date: 2025-06-03
 title: Mount Prevost - East Launch
 location:
   latitude: 1
