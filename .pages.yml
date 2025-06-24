@@ -21,7 +21,7 @@ components:
       message: 'This must be a valid email address (e.g. hello@example.com).'
 content:
   - name: areas
-    label: Ares
+    label: Areas
     type: collection
     path: '_content/areas'
     view:
