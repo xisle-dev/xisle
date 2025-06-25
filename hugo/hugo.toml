@@ -1,0 +1,19 @@
+baseURL = 'https://xisle.net/'
+languageCode = 'en-us'
+title = 'X/Isle'
+theme = "xisle"
+
+[mediaTypes]
+[mediaTypes."application/geojson"]
+  suffixes = ["json"]
+
+[outputFormats]
+  [outputFormats.geojson]
+    baseName = "locations"
+    isPlainText = true
+    mediaType = "application/geojson"
+
+[outputs]
+  home = ['html', 'rss', 'json', 'geojson']
+  page = ['html', 'json', 'geojson']  
+  section = ['html', 'rss', 'json']
