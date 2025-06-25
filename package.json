@@ -10,7 +10,7 @@
     "typescript": "^5"
   },
   "scripts": {
-    "hugo": "hugo build --destination ../_output --contentDir _content --source hugo",
+    "hugo": "hugo build --destination ../_output --source hugo",
     "test": "bun test"
   },
 }
