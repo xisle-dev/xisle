@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Areas on X/Isle</title>
+    <link>https://xisle.net/areas/</link>
+    <description>Recent content in Areas on X/Isle</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://xisle.net/areas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hill 60</title>
+      <link>https://xisle.net/areas/hill-60/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://xisle.net/areas/hill-60/</guid>
+      <description>&lt;h1 id=&#34;hill-60&#34;&gt;Hill 60&lt;/h1&gt;&#xA;&lt;p&gt;Nice XC Starting Point&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mount Prevost</title>
+      <link>https://xisle.net/areas/mount-prevost/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://xisle.net/areas/mount-prevost/</guid>
+      <description>&lt;h1 id=&#34;mount-prevost&#34;&gt;Mount Prevost&lt;/h1&gt;&#xA;&lt;p&gt;The premier flying site on Vancouver Island&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Stinky Fish</title>
+      <link>https://xisle.net/areas/stinky-fish/</link>
+      <pubDate>Tue, 24 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://xisle.net/areas/stinky-fish/</guid>
+      <description>&lt;h1 id=&#34;stinky-fish&#34;&gt;Stinky Fish&lt;/h1&gt;&#xA;&lt;p&gt;Despite the name the are is really quite fresh. And big!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

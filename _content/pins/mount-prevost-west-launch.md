@@ -1,5 +1,4 @@
 ---
-published: true
 title: Mount Prevost - West Launch
 location:
   latitude: 1

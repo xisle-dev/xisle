@@ -1,5 +1,4 @@
 ---
-published: true
 date: 2025-06-24
 title: Mount Prevost
 location:

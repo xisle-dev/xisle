@@ -3,6 +3,13 @@ languageCode = 'en-us'
 title = 'X/Isle'
 theme = "xisle"
 
+[module]
+  [[module.mounts]]
+    disableWatch = false
+    lang = ''
+    source = 'E:/X/_content'
+    target = 'content'
+
 [mediaTypes]
 [mediaTypes."application/geojson"]
   suffixes = ["json"]

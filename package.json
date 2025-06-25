@@ -1,0 +1,16 @@
+{
+  "name": "x",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "hugo": "hugo build --destination ../_output --contentDir _content --source hugo",
+    "test": "bun test"
+  },
+}
