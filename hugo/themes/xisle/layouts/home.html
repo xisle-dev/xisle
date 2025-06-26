@@ -3,5 +3,9 @@
   {{ range site.RegularPages }}
     <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
     {{ .Summary }}
+    <h2>Dangers</h2>
+    <p>{{ .Params.dangers }}</p>
+    
+    
   {{ end }}
 {{ end }}
