@@ -11,6 +11,5 @@
   },
   "scripts": {
     "hugo": "hugo build --destination ../_output --source hugo",
-    "test": "bun test"
-  },
+  }
 }
