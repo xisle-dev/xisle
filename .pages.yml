@@ -99,6 +99,10 @@ content:
       - name: dangers
         label: Dangers
         type: rich-text
+        options:
+          media: images
+          extensions: ['png']
+
   - name: pins
     label: Pins
     path: _content/pins
