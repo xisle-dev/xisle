@@ -10,3 +10,5 @@ location:
 dangers: Airspace
 ---
 // Ride and thermalling
+
+![](/images/Screenshot%202025-03-13%20121351.png)
