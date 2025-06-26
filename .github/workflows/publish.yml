@@ -31,6 +31,9 @@ jobs:
         env:
           HUGO_ENV: production
           
+      - name: dir
+        run: ls
+
       - name: Publish to Cloudflare Workers Sites
         uses: cloudflare/wrangler-action@v3
         with:
