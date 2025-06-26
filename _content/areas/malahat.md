@@ -7,6 +7,15 @@ location:
   latitude: 1
   longitude: 2
   elevation: 3
+view:
+  position:
+    latitude: 6
+    longitude: 45
+    elevation: 456
+  lookat:
+    latitude: 456
+    longitude: 456
+    elevation: 456
 dangers: Airspace
 ---
 // Ridge and thermalling
