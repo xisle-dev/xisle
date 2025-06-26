@@ -1,5 +1,14 @@
-media: media
-  path: _content/media
+media:
+  - name: files
+    label: Files
+    input: _content/files/documents
+    output: /files/documents
+    categories: [ document ]
+  - name: images # Note: 'name' key is required here
+    label: Images
+    input: _content/images
+    output: /images
+    extensions: [ png, webp ]
 components:
   location: # 'hero' is the component name/key
     label: Location
