@@ -1,4 +1,5 @@
 media: media
+  path: _content/media
 components:
   location: # 'hero' is the component name/key
     label: Location
