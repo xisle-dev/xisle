@@ -2,12 +2,12 @@ media:
   - name: files
     label: Files
     input: _content/documents
-    output: _content/documents
+    output: /documents
     categories: [ document ]
   - name: images # Note: 'name' key is required here
     label: Images
     input: _content/images
-    output: _contnet/images
+    output: /images
     extensions: [ png, webp ]
 components:
   location: # 'hero' is the component name/key
