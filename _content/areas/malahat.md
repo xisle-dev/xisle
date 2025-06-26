@@ -16,7 +16,7 @@ view:
     latitude: 456
     longitude: 456
     elevation: 456
-dangers: Airspace
+dangers: "![](/images/Malahat/Screenshot%202025-04-12%20185033.png)"
 ---
 // Ridge and thermalling
 
