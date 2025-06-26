@@ -18,7 +18,7 @@ jobs:
           hugo-version: 'latest'
 
       - name: Build Hugo Site
-        run: hugo --minify --gc
+        run: hugo --destination ..\_output --source hugo --minify --gc
 
       - name: Publish to Cloudflare Workers Sites
         uses: cloudflare/wrangler-action@1.3.0
