@@ -9,7 +9,7 @@ location:
   elevation: 3
 dangers: Airspace
 ---
-// Ride and thermalling
+// Ridge and thermalling
 
 **dsfgsdfg**
 
