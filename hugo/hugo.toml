@@ -7,7 +7,7 @@ theme = "xisle"
   [[module.mounts]]
     disableWatch = false
     lang = ''
-    source = 'E:/X/_content'
+    source = '../_content'
     target = 'content'
 
 [mediaTypes]
