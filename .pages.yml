@@ -36,7 +36,7 @@ components:
       - name: elevation
         label: Elevation
         type: number
-  view: # 'hero' is the component name/key
+  lookat: # 'hero' is the component name/key
     label: Look At
     type: object
     fields:
