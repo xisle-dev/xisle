@@ -4,7 +4,7 @@ compatibility_date = "2024-06-23" # Use the current date or a recent one
 
 # This is the crucial part for static assets
 [assets]
-directory = "_output"
+directory = "../../_outputf"
 
 
 # CF API Token     JGwEYWgTadxN_I761rDMT36q7R7eX1net2YxOL7N
