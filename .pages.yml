@@ -46,6 +46,9 @@ content:
       - name: body
         label: Body
         type: rich-text
+      - name: dangers
+        label: Dangers
+        type: rich-text
   - name: pins
     label: Pins
     path: _content/pins
