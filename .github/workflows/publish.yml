@@ -27,7 +27,7 @@ jobs:
           hugo-version: 'latest'
 
       - name: Build Hugo Site
-        run: hugo --destination worker/_output --source hugo --minify --gc
+        run: hugo --destination worker/_outputf --source hugo --minify --gc
         env:
           HUGO_ENV: production
           
