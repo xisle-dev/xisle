@@ -11,7 +11,20 @@ media:
     extensions: [ png, webp ]
 components:
   location: # 'hero' is the component name/key
-    label: Locationa
+    label: Location
+    type: object
+    fields:
+      - name: latitude
+        label: Latitude
+        type: number
+      - name: longitude
+        label: Longitude
+        type: number
+      - name: elevation
+        label: Elevation
+        type: number
+  position: # 'hero' is the component name/key
+    label: Position
     type: object
     fields:
       - name: latitude
@@ -24,15 +37,18 @@ components:
         label: Elevation
         type: number
   view: # 'hero' is the component name/key
-    label: View
+    label: Look At
     type: object
     fields:
-      - name: location
-        label: Locationb
-        component: location
-      - name: lookat
-        label: Look
-        component: location
+      - name: latitude
+        label: Latitude
+        type: number
+      - name: longitude
+        label: Longitude
+        type: number
+      - name: elevation
+        label: Elevation
+        type: number
   email: # 'email' is the component name/key
     label: Email Address
     type: string
@@ -64,7 +80,12 @@ content:
       - name: location
         component: location
       - name: view
-        component: view
+        type: object
+        fields:
+          - name: position
+            component: position
+          - name: lookat
+            component: lookat
       - name: body
         label: Body
         type: rich-text
