@@ -11,7 +11,7 @@ media:
     extensions: [ png, webp ]
 components:
   location: # 'hero' is the component name/key
-    label: Location
+    label: Locationa
     type: object
     fields:
       - name: latitude
@@ -28,10 +28,10 @@ components:
     type: object
     fields:
       - name: location
-        label: location
+        label: Locationb
         component: location
       - name: lookat
-        label: Look At
+        label: Look
         component: location
   email: # 'email' is the component name/key
     label: Email Address
