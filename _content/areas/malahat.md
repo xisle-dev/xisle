@@ -11,6 +11,6 @@ dangers: Airspace
 ---
 // Ride and thermalling
 
-![](_contnet/images/Screenshot%202025-03-13%20121351.png)**dsfgsdfg**
+**dsfgsdfg**
 
 ![](/images/Malahat/Screenshot%202025-04-12%20185033.png)
