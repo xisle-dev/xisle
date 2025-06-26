@@ -11,5 +11,8 @@
   },
   "scripts": {
     "hugo": "hugo build --destination ../_output --source hugo"
+  },
+  "dependencies": {
+    "hono": "^4.8.3"
   }
 }
