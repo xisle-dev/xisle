@@ -10,6 +10,6 @@
     "typescript": "^5"
   },
   "scripts": {
-    "hugo": "hugo build --destination ../_output --source hugo",
+    "hugo": "hugo build --destination ../_output --source hugo"
   }
 }
