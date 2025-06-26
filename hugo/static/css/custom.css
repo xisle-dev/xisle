@@ -1,0 +1,11 @@
+/* Apply Inter font to the entire body */
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  overflow: hidden; /* Prevent scrolling due to Cesium's full-screen nature */
+}
+/* Ensure Cesium container takes full viewport height */
+#cesiumContainer {
+  width: 100vw;
+  height: 100vh;
+}

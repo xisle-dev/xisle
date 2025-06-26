@@ -1,4 +1,8 @@
 import { Hono } from 'hono';
+import { MapView } from './components/MapView'
+import { InfoView } from './components/InfoView'
+import { logger } from 'hono/logger'
+
 import { serveStatic } from '@hono/node-server/serve-static'; // Not for Workers, see note below
 
 // Define your environment variables/bindings
@@ -6,7 +10,33 @@ type Bindings = {
   ASSETS: { fetch: typeof fetch }; // Cloudflare's assets binding
 };
 
+const customLogger = (message: string, ...rest: string[]) => {
+  console.log(message, ...rest)
+}
+
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use(logger(customLogger))
+
+app.get('/pin/:pin', (context) => {
+  const pinUrl = `/proxy/pin/${context.req.param('pin')}`;
+  customLogger(`Pin URL: ${pinUrl}`);
+
+  if( context.req.header("hx-target") === "info" ){
+    return context.html(<InfoView pin={pinUrl} />);
+  } else {
+    return context.html(<MapView pin={pinUrl}></MapView>);
+  }
+    return context.html('Hello from PIN Hono API!');
+
+})
+
+app.get('/', (context) => {
+  customLogger(`Home Page`);
+
+  return context.html(<MapView pin="xxx"></MapView>);
+})
+
 
 // Basic API route (handled by Hono)
 app.get('/map.html', (c) => {
