@@ -23,6 +23,16 @@ components:
       - name: elevation
         label: Elevation
         type: number
+  view: # 'hero' is the component name/key
+    label: View
+    type: object
+    fields:
+      - name: location
+        label: location
+        component: location
+      - name: lookat
+        label: Look At
+        component: location
   email: # 'email' is the component name/key
     label: Email Address
     type: string
@@ -53,6 +63,8 @@ content:
         type: string
       - name: location
         component: location
+      - name: view
+        component: view
       - name: body
         label: Body
         type: rich-text
