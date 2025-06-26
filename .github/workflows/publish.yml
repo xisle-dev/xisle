@@ -10,7 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
       
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1 # Use the latest version
@@ -19,13 +22,15 @@ jobs:
         run: bun install
         
       - name: Setup Latest Version of Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
 
       - name: Build Hugo Site
-        run: hugo --destination _output --source hugo --minify --gc
-
+        run: hugo --destination worker/_output --source hugo --minify --gc
+        env:
+          HUGO_ENV: production
+          
       - name: Publish to Cloudflare Workers Sites
         uses: cloudflare/wrangler-action@v3
         with:
