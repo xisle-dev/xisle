@@ -23,40 +23,28 @@ components:
       - name: elevation
         label: Elevation
         type: number
-  position: # 'hero' is the component name/key
-    label: Position
-    type: object
-    fields:
-      - name: latitude
-        label: Latitude
-        type: number
-      - name: longitude
-        label: Longitude
-        type: number
-      - name: elevation
-        label: Elevation
-        type: number
-  lookat: # 'hero' is the component name/key
-    label: Look At
-    type: object
-    fields:
-      - name: latitude
-        label: Latitude
-        type: number
-      - name: longitude
-        label: Longitude
-        type: number
-      - name: elevation
-        label: Elevation
-        type: number
   view:
-     label: View
-     type: object
-     fields:
-       - name: position
-         component: position
-       - name: lookat
-         component: lookat
+    label: View
+    type: object
+    fields:
+      - name: latitude
+        label: Latitude
+        type: number
+      - name: longitude
+        label: Longitude
+        type: number
+      - name: height
+        label: Height
+        type: number
+      - name: heading
+        label: Heading
+        type: number
+      - name: pitch
+        label: Pitch
+        type: number
+      - name: roll
+        label: Roll
+        type: number
          
   email: # 'email' is the component name/key
     label: Email Address
