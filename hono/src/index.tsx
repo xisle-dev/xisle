@@ -18,8 +18,10 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 app.use(logger(customLogger))
 
+customLogger(`1`);
+
 app.get('/pin/:pin', (context) => {
-  const pinUrl = `/proxy/pin/${context.req.param('pin')}`;
+  const pinUrl = `${context.req.param('pin')}`;
   customLogger(`Pin URL: ${pinUrl}`);
 
   if( context.req.header("hx-target") === "info" ){
@@ -27,16 +29,15 @@ app.get('/pin/:pin', (context) => {
   } else {
     return context.html(<MapView pin={pinUrl}></MapView>);
   }
-    return context.html('Hello from PIN Hono API!');
 
 })
 
 app.get('/', (context) => {
   customLogger(`Home Page`);
+  return context.html('Root!');
 
-  return context.html(<MapView pin="xxx"></MapView>);
+  //return context.html(<MapView pin="xxx"></MapView>);
 })
-
 
 // Basic API route (handled by Hono)
 app.get('/map.html', (c) => {
@@ -55,22 +56,24 @@ app.get('/pin.json', (c) => {
 // is *not* for Cloudflare Workers. It's for Node.js environments.
 // For Cloudflare Workers, you directly use `env.ASSETS.fetch(request)`.
 
-app.get('*', async (c) => {
-  try {
-    const response = await c.env.ASSETS.fetch(c.req.raw);
-    // You might want to add some logic here if response.status is 404
-    // and you want to serve a custom 404 page or redirect
-    if (response.status === 404 && c.req.url.endsWith('/') && !c.req.url.includes('.')) {
-      // If it's a directory and no index.html was found by ASSETS,
-      // you could redirect to a specific SPA fallback, or serve a generic 404.
-      // For single-page applications, you'd typically set `not_found_handling = "single-page-application"`
-      // in `wrangler.toml` which usually returns `index.html` for all unmatched routes.
-    }
-    return response;
-  } catch (e) {
-    console.error("Error serving static asset:", e);
-    return c.text('Internal Server Error', 500);
-  }
-});
+// app.get('*', async (c) => {
+//   customLogger(`Catchall Route`);
+
+//   try {
+//     const response = await c.env.ASSETS.fetch(c.req.raw);
+//     // You might want to add some logic here if response.status is 404
+//     // and you want to serve a custom 404 page or redirect
+//     if (response.status === 404 && c.req.url.endsWith('/') && !c.req.url.includes('.')) {
+//       // If it's a directory and no index.html was found by ASSETS,
+//       // you could redirect to a specific SPA fallback, or serve a generic 404.
+//       // For single-page applications, you'd typically set `not_found_handling = "single-page-application"`
+//       // in `wrangler.toml` which usually returns `index.html` for all unmatched routes.
+//     }
+//     return response;
+//   } catch (e) {
+//     console.error("Error serving static asset:", e);
+//     return c.text('Internal Server Error', 500);
+//   }
+// });
 
 export default app;

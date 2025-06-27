@@ -12,6 +12,7 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                 <script src="https://cdn.tailwindcss.com"></script>
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
                 <link href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
                 <link href="/css/custom.css" rel="stylesheet" />
                 <script src="https://unpkg.com/htmx.org@1.9.12"></script>
                 <script src="/js/map.js"></script>
@@ -25,11 +26,11 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                         z-10
                         border border-gray-200
                         transform transition-all duration-300 ease-in-out
-                        hover:scale-[1.01]" hx-history-elt hx-get="/proxy/pin" hx-target="#list" hx-trigger="load">
+                        hover:scale-[1.01]" hx-history-elt hx-get="/pin" hx-target="#list" hx-trigger="load">
                         <div class="text-lg font-semibold mb-2">Pin List</div>
                         <div id="list" class="space-y-2" hx-boost="true" hx-target="#info">
                         </div>
-                        <div id="info" >
+                        <div id="htmlSummaryContainer" >
                         </div>
                         <div class="mt-4 text-xs md:text-sm text-gray-600">
                             <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
@@ -40,6 +41,7 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                 </div>
 
                 <script>
+                    
                 </script>
             </body>
         </html >
