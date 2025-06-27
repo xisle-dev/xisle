@@ -2,11 +2,12 @@
 {{- $pins := slice -}}
 
 {{- range $pages -}}
+  {{- with .Params.dangers | transform.Unmarshal -}}
     {{ $pins = $pins | append (dict 
        "type" "Feature"
        "geometry" ( dict 
             "type" "Point"
-            "coordinates" (slice .Params.location.longitude .Params.location.latitude .Params.location.height)
+            "coordinates" (slice .location.longitude .location.latitude .location.elevation)
         )
         "properties" (dict
             "title" .Title
@@ -14,7 +15,7 @@
         )
     )
     }}
-    
+{{ end }}
  {{- end -}}
  {
     "type": "FeatureCollection",

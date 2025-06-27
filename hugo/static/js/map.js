@@ -140,14 +140,14 @@ function initCesium() {
       };
       var json = {
         title: "new pin",
-        pin: {
+        location: {
           latitude: mouseLat,
           longitude: mouseLon,
-          height: mouseHeight,
+          elevation: mouseHeight,
         },
         view: view,
       };
-      navigator.clipboard.writeText("---\n" + jsyaml.dump(json) + "\n---");
+      navigator.clipboard.writeText(  JSON.stringify( json ) );
 
       //navigator.clipboard.writeText(JSON.stringify(json));
       //console.log(JSON.stringify(json));

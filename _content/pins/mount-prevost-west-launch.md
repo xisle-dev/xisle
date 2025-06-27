@@ -1,16 +1,7 @@
 ---
 title: Mount Prevost - West Launch
-location:
-  latitude: 49.754284051414665
-  longitude: -126.08711166567113
-  height: 599.2358941848062
-view:
-  latitude: 49.75279035893195
-  longitude: -126.08558334279243
-  height: 4254.559950688496
-  heading: 91.51268137004985
-  pitch: -83.85892004457791
-  roll: 268.4806405906529
+dangers: '{"title":"new
+  pin","location":{"latitude":49.710040815207776,"longitude":-124.36651792820818,"elevation":-16.36549643519078},"view":{"latitude":49.13897110246137,"longitude":-125.06673004972139,"height":454216.92473285686,"heading":359.99999999999994,"pitch":-90,"roll":0}}'
 areas:
   - _content/areas/mount-prevost.md
 ---
