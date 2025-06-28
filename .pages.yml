@@ -101,6 +101,9 @@ content:
         label: Draft
         type: boolean
         default: true
+      - name: json
+        label: Location/View
+        type: string
       - name: published
         label: Published
         type: date
