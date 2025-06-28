@@ -1,9 +1,10 @@
 ---
+draft: true
+json: '{"title":"new
+  pin","location":{"latitude":48.83140473151953,"longitude":-123.76691382169416,"elevation":737.6614000153315},"view":{"latitude":48.825041381988456,"longitude":-123.76757468527312,"height":1403.0436312694635,"heading":5.412913491607,"pitch":-36.78432937442451,"roll":0.0018359139263358739}}'
 date: 2025-06-03
 title: Mount Prevost - East Launch
 areas:
   - _content/areas/mount-prevost.md
-dangers: '{"title":"new
-  pin","location":{"latitude":49.710040815207776,"longitude":-124.36651792820818,"elevation":-16.36549643519078},"view":{"latitude":49.13897110246137,"longitude":-125.06673004972139,"height":454216.92473285686,"heading":359.99999999999994,"pitch":-90,"roll":0}}'
 ---
 West Facing Crag often nice at the end of the day.
