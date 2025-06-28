@@ -8,6 +8,8 @@
        "geometry" ( dict 
             "type" "Point"
             "coordinates" (slice .location.longitude .location.latitude .location.elevation)
+            "p"  .
+
         )
         "properties" (dict
             "title" .Title
