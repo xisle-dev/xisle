@@ -2,7 +2,7 @@
 {{- $pins := slice -}}
 
 {{- range $pages -}}
-  {{- with .Params.dangers | transform.Unmarshal -}}
+  {{- with .Params.json | transform.Unmarshal -}}
     {{ $pins = $pins | append (dict 
        "type" "Feature"
        "geometry" ( dict 
