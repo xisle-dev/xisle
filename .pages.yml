@@ -64,7 +64,7 @@ content:
       - name: draft
         label: Draft
         type: boolean
-        default: true
+        default: false
       - name: published
         label: Published
         type: date
@@ -100,7 +100,7 @@ content:
       - name: draft
         label: Draft
         type: boolean
-        default: true
+        default: false
       - name: json
         label: Location/View
         type: string
