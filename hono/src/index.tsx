@@ -34,9 +34,7 @@ app.get('/pin/:pin', (context) => {
 
 app.get('/', (context) => {
   customLogger(`Home Page`);
-  return context.html('Root!');
-
-  //return context.html(<MapView pin="xxx"></MapView>);
+  return context.html(<MapView pin="xxx"></MapView>);
 })
 
 // Basic API route (handled by Hono)

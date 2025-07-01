@@ -17,8 +17,9 @@ function initCesium() {
   var terrain = Cesium.Terrain.fromWorldTerrain();
 
   console.log("Create Viewer");
-  // Initialize the Cesium Viewer
+  //Initialize the Cesium Viewer
   const viewer = new Cesium.Viewer("cesiumContainer", {
+    useBrowserRecommendedResolution: false,
     terrain: terrain,
     animation: false,
     timeline: false,
@@ -27,6 +28,8 @@ function initCesium() {
     homeButton: false,
     sceneModePicker: false,
   });
+  viewer.scene.fxaa = false; // Disable FXAA
+  viewer.resolutionScale = window.devicePixelRatio;
 
   var views = [
     {
@@ -67,14 +70,65 @@ function initCesium() {
     roll: Cesium.Math.toRadians(view.roll),
   };
 
-  viewer.dataSources.add(
-    Cesium.GeoJsonDataSource.load("/locations.json", {
-      stroke: Cesium.Color.HOTPINK,
-      fill: Cesium.Color.PINK,
-      strokeWidth: 3,
-      markerSymbol: "?",
-    })
-  );
+  viewer.camera.setView({
+    destination: position,
+    orientation: orientation,
+  });
+
+  Cesium.GeoJsonDataSource.load("/pins/locations.json", {
+    clampToGround: true,
+  }).then((dataSource) => {
+    viewer.dataSources.add(dataSource);
+
+    const entities = dataSource.entities.values;
+    for (let i = 0; i < entities.length; i++) {
+      const entity = entities[i];
+
+      let labelText = "";
+      if (
+        Cesium.defined(entity.properties) &&
+        Cesium.defined(entity.properties.title)
+      ) {
+        labelText = entity.properties.title.getValue();
+      } else {
+        // Fallback if no specific property is found
+        labelText = entity.id; // Or any other default
+      }
+
+      entity.billboard.image = "/images/npsPictograph_0231b.png"
+      entity.billboard.scale=0.4;
+      entity.label = {
+        //showBackground: true,
+        //backgroundColor: Cesium.Color.BLACK.withAlpha(0.5),
+        text: labelText,
+        font: "14pt sans-serif",
+        fillColor: Cesium.Color.YELLOW,
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 1,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        pixelOffset: new Cesium.Cartesian2(0, -29),
+        disableDepthTestDistance: Number.POSITIVE_INFINITY, // Keep label visible even when "behind" terrain
+      };
+
+      const pixelRange = 15;
+      const minimumClusterSize = 2;
+      const enabled = true;
+    
+      dataSource.clustering.enabled = enabled;
+      dataSource.clustering.pixelRange = pixelRange;
+      dataSource.clustering.minimumClusterSize = minimumClusterSize;      
+    }
+  });
+
+  // viewer.dataSources.add(
+  //    Cesium.GeoJsonDataSource.load("/areas/locations.json", {
+  //      stroke: Cesium.Color.GREEN,
+  //      fill: Cesium.Color.DARKGREEN,
+  //      strokeWidth: 3,
+  //      markerSymbol: "A",
+  //    })
+  //  );
 
   // Optional: Add a click event listener to the Cesium map
   // to update the info div with clicked coordinates
@@ -116,41 +170,55 @@ function initCesium() {
 
   handler.setInputAction(function (event) {
     var ray = viewer.camera.getPickRay(event.position);
-    var mousePosition = viewer.scene.globe.pick(ray, viewer.scene);
+    if (ray) {
+      var mousePosition = viewer.scene.globe.pick(ray, viewer.scene);
 
-    if (Cesium.defined(mousePosition)) {
-      var cartographic = Cesium.Cartographic.fromCartesian(mousePosition);
-      var mouseLat = Cesium.Math.toDegrees(cartographic.latitude);
-      var mouseLon = Cesium.Math.toDegrees(cartographic.longitude);
-      var mouseHeight = cartographic.height;
+      if (Cesium.defined(mousePosition)) {
+        var cartographic = Cesium.Cartographic.fromCartesian(mousePosition);
+        var mouseLat = Cesium.Math.toDegrees(cartographic.latitude);
+        var mouseLon = Cesium.Math.toDegrees(cartographic.longitude);
+        var mouseHeight = cartographic.height;
 
-      var camera = viewer.scene.camera;
-      var position = camera.positionCartographic;
-      var orientation = { heading: 0, roll: 0, pitch: 0 };
-      orientation.heading = camera.heading;
-      orientation.pitch = camera.pitch;
-      orientation.roll = camera.roll;
-      var view = {
-        latitude: Cesium.Math.toDegrees(position.latitude),
-        longitude: Cesium.Math.toDegrees(position.longitude),
-        height: position.height,
-        heading: Cesium.Math.toDegrees(orientation.heading),
-        pitch: Cesium.Math.toDegrees(orientation.pitch),
-        roll: Cesium.Math.toDegrees(orientation.roll),
-      };
-      var json = {
-        title: "new pin",
-        location: {
-          latitude: mouseLat,
-          longitude: mouseLon,
-          elevation: mouseHeight,
-        },
-        view: view,
-      };
-      navigator.clipboard.writeText(  JSON.stringify( json ) );
+        var camera = viewer.scene.camera;
+        var position = camera.positionCartographic;
+        var orientation = { heading: 0, roll: 0, pitch: 0 };
+        orientation.heading = camera.heading;
+        orientation.pitch = camera.pitch;
+        orientation.roll = camera.roll;
+        var view = {
+          latitude: Cesium.Math.toDegrees(position.latitude),
+          longitude: Cesium.Math.toDegrees(position.longitude),
+          height: position.height,
+          heading: Cesium.Math.toDegrees(orientation.heading),
+          pitch: Cesium.Math.toDegrees(orientation.pitch),
+          roll: Cesium.Math.toDegrees(orientation.roll),
+        };
+        var json = {
+          title: "new pin",
+          location: {
+            latitude: mouseLat,
+            longitude: mouseLon,
+            elevation: mouseHeight,
+          },
+          view: view,
+        };
+        navigator.clipboard.writeText(JSON.stringify(json));
 
-      //navigator.clipboard.writeText(JSON.stringify(json));
-      //console.log(JSON.stringify(json));
+        const longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(
+          4
+        );
+        const latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(
+          4
+        );
+        const altitude = cartographic.height.toFixed(2);
+
+        latitudeSpan.textContent = `${latitude}°`;
+        longitudeSpan.textContent = `${longitude}°`;
+        altitudeSpan.textContent = `${altitude} m`;
+
+        //navigator.clipboard.writeText(JSON.stringify(json));
+        console.log(JSON.stringify(json));
+      }
     }
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
@@ -175,7 +243,7 @@ function initCesium() {
   //   }
   // }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
-  // Set initial camera view
+  //Set initial camera view
   viewer.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(-122.39, 47.56, 1500000), // Seattle area
     orientation: {
@@ -185,7 +253,7 @@ function initCesium() {
     },
   });
 
-  // Ensure the Cesium viewer resizes correctly with the window
+  //Ensure the Cesium viewer resizes correctly with the window
   window.addEventListener("resize", () => {
     viewer.container.style.width = "100vw";
     viewer.container.style.height = "100vh";

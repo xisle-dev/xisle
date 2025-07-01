@@ -1,0 +1,26 @@
+{{- $pages := .Pages -}}
+{{- $pins := slice -}}
+
+{{- range $pages -}}
+    {{ $pinTitle := .Params.title }}
+    {{- with .Params.json | transform.Unmarshal -}}
+        {{ 
+            $pins = $pins | append (dict 
+                "type" "Feature"
+                "geometry" ( dict 
+                    "type" "Point"
+                    "coordinates" (slice .location.longitude .location.latitude .location.elevation)
+                    "p"  .
+                )
+                "properties" (dict
+                    "title" $pinTitle
+                    "link" .Permalink
+                )
+            )
+        }}
+    {{ end }}
+ {{- end -}}
+ {
+    "type": "FeatureCollection",
+    "features": {{ $pins | jsonify }}
+ }
