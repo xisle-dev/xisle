@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "hugo:build": "hugo build --destination ../_output  --source hugo",
+    "hugo:build": "hugo build --destination ../_output  --source hugo --baseURL http://127.0.0.1:8787",
     "vite:build:client": "bunx vite build --mode client",
     "vite:build:worker": "bunx vite build",
     "build": "bun run hugo:build && bun run vite:build:client && bun run vite:build:worker",

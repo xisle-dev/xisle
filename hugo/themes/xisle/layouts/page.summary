@@ -1,1 +1,1 @@
-<p>{{ .Title }}</p>
+<p>{{ .Summary }}</p>
