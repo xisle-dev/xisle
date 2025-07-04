@@ -64,6 +64,8 @@ content:
       - name: thumb
         label: Thumbnail
         type: image
+        options:
+          media: images
       - name: draft
         label: Draft
         type: boolean
