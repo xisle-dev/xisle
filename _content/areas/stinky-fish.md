@@ -5,6 +5,7 @@ location:
   latitude: 46
   longitude: 47
   elevation: 48
+thumb: /images/Malahat/malahat-1.jpg
 ---
 # Stinky Fish
 

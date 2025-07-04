@@ -1,1 +1,1 @@
-<p>{{ .Summary | plainify | chomp }}</p>
+<p>{{ .Title }}</p>

@@ -22,10 +22,15 @@ theme = "xisle"
 
   [outputFormats.summary]
     baseName = "summary"
-    isPlainText = true
+    isHtml = true
+    mediaType = "text/html"
+
+  [outputFormats.slides]
+    baseName = "slides"
+    isHtml = true
     mediaType = "text/html"
 
 [outputs]
-  home = ['html', 'rss', 'json', 'geojson']
-  page = ['html', 'json', 'geojson', 'summary']  
-  section = ['html', 'rss', 'json', 'geojson']
+  home = ['html']
+  page = ['html', 'summary']  
+  section = ['html', 'geojson', 'slides']

@@ -1,6 +1,7 @@
 ---
 date: 2025-06-24
 title: Hill 60
+thumb: /images/Malahat/malahat-1.jpg
 location:
   latitude: 5
   longitude: 5

@@ -27,23 +27,23 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
             <body class="bg-gray-100 flex items-center justify-center min-h-screen">
                 <div class="relative w-full h-screen">
                     <div id="cesiumContainer" class="absolute inset-0"></div>
-                    <NavView areas={
-                        [ 
-                            {  id: "stinky-fish",  title: "Stinky Fish", image: "mount-prevost-area.png"}, 
-                            {  id: "mount-prevost",  title: "Mount Prevost", image: "mount-prevost-area.png" },
-                            {  id: "hill-60",  title: "Hill 60", image: "hill-60-area.png" },
+                    {/* { a = [ 
+                            {  id: "stinky-fish",  title: "Stinky Fish", image: "place-holder.jpg"}, 
+                            {  id: "mount-prevost",  title: "Mount Prevost", image: "place-holder.jpg" },
+                            {  id: "hill-60",  title: "Hill 60", image: "place-holder.jpg" },
                             {  id: "malahat",  title: "Malahat", image: "Malahat/malahat-1.jpg" },
-                            {  id: "alberni",  title: "Port Alberni", image: "malahat.png" },
-                            {  id: "comox-lake",  title: "Comox Lake", image: "Screenshot 2025-03-13 121351.png" },
-                            {  id: "comox-bluffs",  title: "Comox Bluffs", image: "comox-bluffs-area.png" },
+                            {  id: "alberni",  title: "Port Alberni", image: "place-holder.jpg" },
+                            {  id: "comox-lake",  title: "Comox Lake", image: "place-holder.jpg"},
+                            {  id: "comox-bluffs",  title: "Comox Bluffs", image: "place-holder.jpg" },
                             {  id: "vic-peak",  title: "Victoria Peak", image: "Victoria Peak/vic-peak-1.jpg" },
                             {  id: "forbidden",  title: "Forbidden Plateau", image: "Forbidden Plateau/forbidden-1.jpg" },
-                            {  id: "kitchener",  title: "Mount Kitchener", image: "kitchener-area.png" },
-                            {  id: "bluff-mountain",  title: "Bluff Mountain", image: "bluff-area.png" },
-                            {  id: "dallas-road",  title: "Bluff Mountain", image: "bluff-area.png" },
-                            {  id: "kinsol",  title: "Lois Lake", image: "lois-area.png" }
+                            {  id: "kitchener",  title: "Mount Kitchener", image: "place-holder.jpg" },
+                            {  id: "bluff-mountain",  title: "Bluff Mountain", image: "place-holder.jpg" },
+                            {  id: "dallas-road",  title: "Bluff Mountain", image: "place-holder.jpg" },
+                            {  id: "kinsol",  title: "Lois Lake", image: "place-holder.jpg" }
                         ]
-                     } />
+                    } */}
+                    <NavView areas={[]} />
                     <div class="absolute top-10 left-4 md:top-40 md:left-8 bg-white bg-opacity-90 backdrop-blur-sm
                         p-4 md:p-6 rounded-lg shadow-xl
                         max-w-xs md:max-w-sm lg:max-w-md
@@ -54,7 +54,7 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                         <div class="text-lg font-semibold mb-2">Pin List</div>
                         <div id="list" class="space-y-2" hx-boost="true" hx-target="#info">
                         </div>
-                        <div id="htmlSummaryContainer" hx-get="/areas/index.html" hx-trigger="load" hx-target="#htmlSummary" class="mt-4">
+                        <div id="htmlSummaryContainer" class="mt-4">
                             <div id="htmlSummary" class="text-sm text-gray-600"></div>
 
                         </div>

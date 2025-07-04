@@ -1,29 +1,33 @@
 document.addEventListener("DOMContentLoaded", function (event) {
   initCesium();
-  const glide = new Glide('.glide', 
-    { type: 'carousel', itemWidth: 300, gap: 10, perView: 10,
-      breakpoints: {
-        2100: {
-          itemWidth: 290, // On larger screens, slides can be a bit wider
-          perView: 7
-        },
-        1080: {
-          itemWidth: 190, // On larger screens, slides can be a bit wider
-          perView: 5
-        },
-        800: {
-          itemWidth: 140, // On larger screens, slides can be a bit wider
-          gap:10,
-          perView: 4
-        },
-        600: {
-          itemWidth: 140, // On larger screens, slides can be a bit wider
-          gap: 10,
-          perView: 3
-        }
-    }
-     }
-  ) .mount()
+  htmx.on("htmx:afterSettle", function(evt) {
+    if( evt.target.id === "nav") {
+    const glide = new Glide('.glide', 
+      { type: 'carousel', itemWidth: 300, gap: 10, perView: 10,
+        breakpoints: {
+          2100: {
+            itemWidth: 290, // On larger screens, slides can be a bit wider
+            perView: 7
+          },
+          1080: {
+            itemWidth: 190, // On larger screens, slides can be a bit wider
+            perView: 5
+          },
+          800: {
+            itemWidth: 140, // On larger screens, slides can be a bit wider
+            gap:10,
+            perView: 4
+          },
+          600: {
+            itemWidth: 140, // On larger screens, slides can be a bit wider
+            gap: 10,
+            perView: 3
+          }
+      }
+       }
+    ) .mount()
+  }
+    });
 });
 
 function initCesium() {
