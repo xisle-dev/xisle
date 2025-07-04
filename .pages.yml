@@ -8,7 +8,7 @@ media:
     label: Images
     input: _content/images
     output: /images
-    extensions: [ png, webp ]
+    extensions: [ png, webp, jpg, jpeg ]
 components:
   location: # 'hero' is the component name/key
     label: Location
