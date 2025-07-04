@@ -1,4 +1,5 @@
 ---
+thumb: /images/Malahat/malahat-1.jpg
 draft: false
 title: Victoria Peak
 dangers: '{"title":"Vic
