@@ -1,5 +1,6 @@
 import type { FC } from 'hono/jsx'
 import { InfoView } from './InfoView'
+import { NavView } from './NavView';
 
 export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
     return (
@@ -15,12 +16,35 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
                 <link href="/css/custom.css" rel="stylesheet" />
                 <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+                <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+                <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" />
                 <script src="/js/map.js"></script>
+
             </head>
             <body class="bg-gray-100 flex items-center justify-center min-h-screen">
                 <div class="relative w-full h-screen">
                     <div id="cesiumContainer" class="absolute inset-0"></div>
-                    <div class="absolute top-4 left-4 md:top-8 md:left-8 bg-white bg-opacity-90 backdrop-blur-sm
+                    <NavView areas={
+                        [ 
+                            {  id: "stinky-fish",  title: "Stinky Fish", image: "mount-prevost-area.png"}, 
+                            {  id: "mount-prevost",  title: "Mount Prevost", image: "mount-prevost-area.png" },
+                            {  id: "hill-60",  title: "Hill 60", image: "hill-60-area.png" },
+                            {  id: "malahat",  title: "Malahat", image: "Malahat/malahat-1.jpg" },
+                            {  id: "alberni",  title: "Port Alberni", image: "malahat.png" },
+                            {  id: "comox-lake",  title: "Comox Lake", image: "Screenshot 2025-03-13 121351.png" },
+                            {  id: "comox-bluffs",  title: "Comox Bluffs", image: "comox-bluffs-area.png" },
+                            {  id: "vic-peak",  title: "Victoria Peak", image: "Victoria Peak/vic-peak-1.jpg" },
+                            {  id: "forbidden",  title: "Forbidden Plateau", image: "Forbidden Plateau/forbidden-1.jpg" },
+                            {  id: "kitchener",  title: "Mount Kitchener", image: "kitchener-area.png" },
+                            {  id: "bluff-mountain",  title: "Bluff Mountain", image: "bluff-area.png" },
+                            {  id: "dallas-road",  title: "Bluff Mountain", image: "bluff-area.png" },
+                            {  id: "kinsol",  title: "Lois Lake", image: "lois-area.png" }
+                        ]
+                     } />
+                    <div class="absolute top-10 left-4 md:top-40 md:left-8 bg-white bg-opacity-90 backdrop-blur-sm
                         p-4 md:p-6 rounded-lg shadow-xl
                         max-w-xs md:max-w-sm lg:max-w-md
                         z-10
@@ -30,7 +54,9 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                         <div class="text-lg font-semibold mb-2">Pin List</div>
                         <div id="list" class="space-y-2" hx-boost="true" hx-target="#info">
                         </div>
-                        <div id="htmlSummaryContainer" >
+                        <div id="htmlSummaryContainer" hx-get="/areas/index.html" hx-trigger="load" hx-target="#htmlSummary" class="mt-4">
+                            <div id="htmlSummary" class="text-sm text-gray-600"></div>
+
                         </div>
                         <div class="mt-4 text-xs md:text-sm text-gray-600">
                             <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
@@ -41,7 +67,6 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                 </div>
 
                 <script>
-                    
                 </script>
             </body>
         </html >

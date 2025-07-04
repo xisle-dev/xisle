@@ -20,7 +20,12 @@ theme = "xisle"
     isPlainText = true
     mediaType = "application/geojson"
 
+  [outputFormats.summary]
+    baseName = "summary"
+    isPlainText = true
+    mediaType = "text/html"
+
 [outputs]
   home = ['html', 'rss', 'json', 'geojson']
-  page = ['html', 'json', 'geojson']  
+  page = ['html', 'json', 'geojson', 'summary']  
   section = ['html', 'rss', 'json', 'geojson']

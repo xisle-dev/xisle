@@ -1,18 +1,22 @@
 {
-  "name": "x",
-  "module": "index.ts",
-  "type": "module",
+  "name": "xisle",
+  "version": "1.0.0",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
+  "type": "module",
   "scripts": {
-    "hugo": "hugo build --destination ../_output --source hugo"
+    "hugo:build": "hugo build --destination ../_output  --source hugo",
+    "vite:build:client": "bunx vite build --mode client",
+    "vite:build:worker": "bunx vite build",
+    "build": "bun run hugo:build && bun run vite:build:client && bun run vite:build:worker",
+    "deploy": "bun run build && bunx wrangler deploy",
+    "dev": "bun run hugo:build && bunx wrangler dev",
+    "dev:worker": "bun run hugo:build && bunx wrangler dev --entry src/index.ts"
   },
   "dependencies": {
-    "hono": "^4.8.3"
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.23",
+    "typescript": "^5.0.0"
   }
 }
