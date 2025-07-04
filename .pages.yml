@@ -83,7 +83,7 @@ content:
         type: rich-text
         options:
           media: images
-          extensions: ['png']
+          extensions: ['png', 'jpg', 'jpeg']
       - name: dangers
         label: Dangers
         type: rich-text
