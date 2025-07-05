@@ -4,7 +4,7 @@ draft: false
 published: 2025-06-04
 date: 2025-06-13
 title: Malahat
-location: '{"location":{"latitude":48.55248174872567,"longitude":-123.59338931192322,"elevation":377.4576336335017},"view":{"latitude":48.11192084871743,"longitude":-123.55899709808297,"height":50303.949304131376,"heading":4.915239617118168,"pitch":-41.60406643599522,"roll":359.9881586835206}}'
+location: '{"location":{"latitude":48.587238656768534,"longitude":-123.53469847212268,"elevation":361.72936535330535},"view":{"latitude":48.58913154067705,"longitude":-123.51285809479165,"height":2325.523548309674,"heading":261.3826507724027,"pitch":-32.74112122420473,"roll":0.019916394698004148}}'
 dangers: >-
   ### dsfasdf
 

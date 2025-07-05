@@ -6,7 +6,7 @@ location:
   latitude: 5
   longitude: 5
   elevation: 5
-json: '{"title":"Hill 60","location":{"latitude":48.829880101972044,"longitude":-123.98114363454518,"elevation":788.6431598699756},"view":{"latitude":48.77153189894394,"longitude":-123.96858523104578,"height":2462.4351555563558,"heading":348.93084797966577,"pitch":-19.10920571116557,"roll":359.99772018433333}}'
+location: '{"location":{"latitude":48.824271132317456,"longitude":-123.97758894808669,"elevation":554.6155371283576},"view":{"latitude":48.81681885069048,"longitude":-123.98666838355238,"height":3012.70853106325,"heading":25.635789987038986,"pitch":-65.2702866759257,"roll":0.0007584077744321804}}'
 ---
 # Hill 60
 

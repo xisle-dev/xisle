@@ -46,6 +46,25 @@ function initCesium() {
 
   htmx.on("htmx:afterRequest", (evt) => {
     console.log("Navigate to " + evt.detail.pathInfo.requestPath);
+
+    if( evt.srcElement.dataset ) {
+      if( evt.srcElement.dataset.loc) {
+        console.log( JSON.parse( evt.srcElement.dataset.loc ) );
+        const location = JSON.parse( evt.srcElement.dataset.loc );
+        const view = location.view;
+        console.log( view );
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees( view.longitude, view.latitude, view.height), // Seattle area
+          orientation: {
+            heading: Cesium.Math.toRadians(view.heading),
+            pitch: Cesium.Math.toRadians(view.pitch),
+            roll: Cesium.Math.toRadians(view.roll),
+          },
+        });
+      };
+    }
+
+
   });
 
   // CesiumJS access token (replace with your own if you have one)
@@ -63,12 +82,11 @@ function initCesium() {
     animation: false,
     timeline: false,
     infoBox: false,
-    baseLayerPicker: false,
+    baseLayerPicker: true,
     homeButton: false,
     sceneModePicker: false,
+    resolutionScale: 0.1, // Set resolution scale to 1.0 for better performance
   });
-  viewer.scene.fxaa = false; // Disable FXAA
-  viewer.resolutionScale = window.devicePixelRatio;
 
   var views = [
     {
@@ -233,7 +251,6 @@ function initCesium() {
           roll: Cesium.Math.toDegrees(orientation.roll),
         };
         var json = {
-          title: "new pin",
           location: {
             latitude: mouseLat,
             longitude: mouseLon,

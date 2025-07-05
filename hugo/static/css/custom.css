@@ -21,7 +21,8 @@ body {
 .image-container img {
   display: block; /* Removes extra space below the image */
   width: 200px; /* Ensures image is responsive within its container */
-  height: 150x;
+  max-height: 130px;
+  min-height: 130px;
   border-radius: 25px;
 }
 
@@ -41,5 +42,10 @@ body {
 
 .swiper {
   width: 100%;
-  height: 250px;
+  height: 160px;
+}
+
+.cesium-viewer-toolbar {
+  top: 300;
+  left: 800
 }
