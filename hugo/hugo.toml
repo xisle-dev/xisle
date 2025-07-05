@@ -31,6 +31,6 @@ theme = "xisle"
     mediaType = "text/html"
 
 [outputs]
-  home = ['html']
+  home = ['html', 'geojson']
   page = ['html', 'summary']  
   section = ['html', 'geojson', 'slides']
