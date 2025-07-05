@@ -9,49 +9,6 @@ media:
     input: _content/images
     output: /images
     extensions: [ png, webp, jpg, jpeg ]
-components:
-  location: # 'hero' is the component name/key
-    label: Location
-    type: object
-    fields:
-      - name: latitude
-        label: Latitude
-        type: number
-      - name: longitude
-        label: Longitude
-        type: number
-      - name: elevation
-        label: Elevation
-        type: number
-  view:
-    label: View
-    type: object
-    fields:
-      - name: latitude
-        label: Latitude
-        type: number
-      - name: longitude
-        label: Longitude
-        type: number
-      - name: height
-        label: Height
-        type: number
-      - name: heading
-        label: Heading
-        type: number
-      - name: pitch
-        label: Pitch
-        type: number
-      - name: roll
-        label: Roll
-        type: number
-         
-  email: # 'email' is the component name/key
-    label: Email Address
-    type: string
-    pattern:
-      regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-      message: 'This must be a valid email address (e.g. hello@example.com).'
 content:
   - name: areas
     label: Areas
@@ -80,10 +37,7 @@ content:
         label: Title
         type: string
       - name: location
-        label: Location
-        type: string
-      - name: view
-        label: View
+        label: Location JSON
         type: string
       - name: body
         label: Body
@@ -109,10 +63,8 @@ content:
         type: boolean
         default: false
       - name: location
-        label: Location
+        label: Location JSON
         type: string
-      - name: view
-        label: View
         type: string
       - name: published
         label: Published
@@ -123,8 +75,6 @@ content:
       - name: title
         label: Title
         type: string
-      - name: location
-        component: location
       - name: areas
         label: Areas
         type: reference
