@@ -1,6 +1,6 @@
 ---
 draft: false
-location: '{"location":{"latitude":50.02637595234025,"longitude":-126.11795416313599,"elevation":1147.7829787263654},"view":{"latitude":50.01361292751048,"longitude":-126.16124861068462,"height":2700.8549942091095,"heading":60.33190833143041,"pitch":-19.407447300738845,"roll":0.005364117176762855}}'
+location: '{"location":{"latitude":50.02678040149402,"longitude":-126.11804661276841,"elevation":1141.3958935156452},"view":{"latitude":50.0248043101799,"longitude":-126.13529640908388,"height":2100.680570933585,"heading":75.71870272450032,"pitch":-39.13408758316219,"roll":359.99331247129095}}'
 title: Victoria Peak - Trail Head
 areas:
   - _content/areas/vic-peak.md
