@@ -3,7 +3,7 @@
 
 {{- range $pages -}}
     {{ $pinTitle := .Params.title }}
-    {{- with .Params.json | transform.Unmarshal -}}
+    {{- with .Params.location | transform.Unmarshal -}}
         {{ 
             $pins = $pins | append (dict 
                 "type" "Feature"
