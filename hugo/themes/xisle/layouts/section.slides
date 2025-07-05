@@ -1,9 +1,8 @@
   {{ range .Pages }}
-  <li class="glide__slide" hx-get="{{ .Permalink }}summary.html" 
-      hx-target="#htmlSummary">>
+<div class="swiper-slide" hx-get="{{ .Permalink }}summary.html" hx-target="#htmlSummary">
   <div class="image-container">
     <img src="{{ .Params.thumb }}" alt="{{ .Title }}"/>
     <div class="image-label">{{ .Title }}</div>
   </div>
-</li>
+</div>
   {{ end }}

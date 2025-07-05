@@ -2,32 +2,43 @@ document.addEventListener("DOMContentLoaded", function (event) {
   initCesium();
   htmx.on("htmx:afterSettle", function(evt) {
     if( evt.target.id === "nav") {
-    const glide = new Glide('.glide', 
-      { type: 'carousel', itemWidth: 300, gap: 10, perView: 10,
+      var swiper = new Swiper(".mySwiper", {
+        direction: "horizontal",
+        
+        slidesPerView: '7',
+        spaceBetween: 30,
+        centeredSlides: false,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
         breakpoints: {
           2100: {
             itemWidth: 290, // On larger screens, slides can be a bit wider
-            perView: 7
+            slidesPerView: 7
           },
           1080: {
             itemWidth: 190, // On larger screens, slides can be a bit wider
-            perView: 5
+            slidesPerView: 5
           },
           800: {
             itemWidth: 140, // On larger screens, slides can be a bit wider
-            gap:10,
-            perView: 4
+            spaceBetween:10,
+            slidesPerView: 4
           },
           600: {
             itemWidth: 140, // On larger screens, slides can be a bit wider
-            gap: 10,
-            perView: 3
-          }
-      }
-       }
-    ) .mount()
-  }
-    });
+            gaspaceBetweenp: 10,
+            slidesPerView: 3
+          },
+        }
+      });
+    }
+  });
 });
 
 function initCesium() {

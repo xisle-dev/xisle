@@ -19,14 +19,19 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
                 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+                />
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" />
                 <script src="/js/map.js"></script>
 
             </head>
             <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-                <div class="relative w-full h-screen">
-                    <div id="cesiumContainer" class="absolute inset-0"></div>
+            <div class="relative w-full h-screen">
+                <div id="cesiumContainer" class="absolute inset-0"></div>
                     {/* { a = [ 
                             {  id: "stinky-fish",  title: "Stinky Fish", image: "place-holder.jpg"}, 
                             {  id: "mount-prevost",  title: "Mount Prevost", image: "place-holder.jpg" },
@@ -43,8 +48,8 @@ export const MapView: FC<{ pin: string }> = (props: { pin: string }) => {
                             {  id: "kinsol",  title: "Lois Lake", image: "place-holder.jpg" }
                         ]
                     } */}
-                    <NavView areas={[]} />
-                    <div class="absolute top-10 left-4 md:top-40 md:left-8 bg-white bg-opacity-90 backdrop-blur-sm
+            <NavView areas={[]} />
+            <div class="absolute top-10 left-4 md:top-40 md:left-8 bg-white bg-opacity-90 backdrop-blur-sm
                         p-4 md:p-6 rounded-lg shadow-xl
                         max-w-xs md:max-w-sm lg:max-w-md
                         z-10
