@@ -80,9 +80,11 @@ content:
         label: Title
         type: string
       - name: location
-        component: location
+        label: Location
+        type: string
       - name: view
-        component: view
+        label: View
+        type: string
       - name: body
         label: Body
         type: rich-text
@@ -106,8 +108,11 @@ content:
         label: Draft
         type: boolean
         default: false
-      - name: json
-        label: Location/View
+      - name: location
+        label: Location
+        type: string
+      - name: view
+        label: View
         type: string
       - name: published
         label: Published
