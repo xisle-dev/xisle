@@ -1,5 +1,5 @@
 ---
-thumb: /images/place-holder.jpg
+thumb: /images/Dallas Road/Dallas Road 1.jpg
 draft: false
 title: Dallas Road
 ---
