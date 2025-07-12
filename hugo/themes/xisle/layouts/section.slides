@@ -3,7 +3,6 @@
   <div class="image-container">
     {{ with resources.Get .Params.thumb }}
       {{ with .Fill "300x200 q100 Center" }}
-      <span>rrr</span>
         <img src="{{ .RelPermalink }}"  width={{ .Width }} height={{ .Height }} alt="{{ .Title }}">
       {{ end }}
     {{ end }}
