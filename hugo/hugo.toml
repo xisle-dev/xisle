@@ -10,6 +10,12 @@ theme = "xisle"
     source = '../_content'
     target = 'content'
 
+  [[module.mounts]]
+    disableWatch = false
+    lang = ''
+    source = '../_content'
+    target = 'assets'
+
 [mediaTypes]
 [mediaTypes."application/geojson"]
   suffixes = ["json"]

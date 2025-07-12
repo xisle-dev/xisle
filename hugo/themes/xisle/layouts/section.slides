@@ -1,7 +1,12 @@
 {{ range .Pages }}
 <div class="swiper-slide" hx-get="{{ .Permalink }}summary.html" hx-target="#htmlSummary" hx-target="#htmlSummary" data-loc="{{ .Params.location }}">
   <div class="image-container">
-    <img src="{{ .Params.thumb }}" alt="{{ .Title }}"/>
+    {{ with resources.Get .Params.thumb }}
+      {{ with .Fill "300x200 q100 Center" }}
+      <span>rrr</span>
+        <img src="{{ .RelPermalink }}"  width={{ .Width }} height={{ .Height }} alt="{{ .Title }}">
+      {{ end }}
+    {{ end }}
     <div class="image-label">{{ .Title }}</div>
   </div>
 </div>
