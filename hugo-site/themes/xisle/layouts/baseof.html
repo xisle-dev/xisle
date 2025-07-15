@@ -24,7 +24,6 @@
       type="image/svg+xml"
     />
 
-
     {{ with resources.Get "js/main.js" }}
     {{$opts := dict
       "minify" (not hugo.IsDevelopment)
@@ -59,7 +58,7 @@
   <body>
     <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
     <div class="overlay">
-      <div class="swiper mySwiper " id="test">
+      <div class="swiper" id="test">
         <div
           id="nav"
           class="swiper-wrapper"

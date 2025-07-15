@@ -13,6 +13,25 @@ body {
   height: 100vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 3rem; /* Adjusted for better visibility */
+}
+
+h2 {
+  font-size: 2rem; /* Adjusted for better visibility */
+}
+li {
+  display: inline;
+}
+ul {
+  display: inline;
+}
+
 .overlay {
   position: absolute;
   width: 100vw;
@@ -24,6 +43,11 @@ body {
 .swiper-slide {
   pointer-events: auto;
 }
+
+.swiper-wrapper {
+  background-color: brown;
+}
+
 .swiper-pagination-bullet{
   pointer-events: auto;
 }
@@ -43,9 +67,17 @@ body {
   display: none; /* Hide Cesium credits */
 }
 
+#htmlSummary {
+  pointer-events: none
+}
 image {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ensures the image covers the container */
   border-radius: 15px;
+}
+
+.video-player {
+  pointer-events: auto;
+
 }

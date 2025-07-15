@@ -1,18 +1,12 @@
+<div class="float-left rounded-xl">
+  <a href="https://app.pagescms.org/xisle-dev/xisle/main/collection/areas/edit/_cms%2Fcontent%2Fareas%2Fhill-60.md" target="_blank" class="w-64 flex-none"></a>
 
-asdASDASDFSADF
-<div class="flex bg-yellow-500 bg-opacity-25" >
-  <a href="https://app.pagescms.org/xisle-dev/xisle/main/collection/areas/edit/_cms%2Fcontent%2Fareas%2Fhill-60.md" target="_blank" class="w-64 flex-none">
-    <h2 class="text-2xl font-bold">{{ .Title }}</h2>
- <div class="w-14 flex-none" width="300" height="200">    <div class="image-container">
-      {{ with resources.Get .Params.thumb }}
-        {{ with .Fill "300x200 q100 Center" }}
-          <img src="{{ .RelPermalink }}"  width={{ .Width }} height={{ .Height }} alt="{{ .Title }}">
-        {{ end }}
-      {{ end }}
-      <div class="image-label">{{ .Title }} </div>
-    </div>
+  {{ with resources.Get .Params.thumb }} 
+  {{ with .Fill "300x200 q100 Center" }}
+  <img
+    class="border-2 border-blue-500 rounded-xl"
+    src="{{ .RelPermalink }}"
+  />
+  {{ end }} {{ end }}
 </div>
-  <div class="w-64 flex-1 bg-blue-900">{{ .Summary }}</div>
-  <div class="w-32 flex-1 ...">Ipso lirum</div>
-
-</div>
+<div class="max-h-200 m-5">{{ .Content }}</div>

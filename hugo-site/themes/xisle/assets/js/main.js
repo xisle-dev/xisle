@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       // });
   
 
-      var swiper = new Swiper(".mySwiper", {
+      var swiper = new Swiper(".swiper", {
         direction: "horizontal",
 
         slidesPerView: "1",

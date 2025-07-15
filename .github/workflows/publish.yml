@@ -15,19 +15,13 @@ jobs:
         with:
           submodules: true
       
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1 # Use the latest version
-
-      - name: Install dependencies (with Bun)
-        run: bun install
-        
       - name: Setup Latest Version of Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
 
       - name: Build Hugo Site
-        run: hugo --destination ../_output --source hugo --minify --gc
+        run: hugo --destination ../_hugo-output --source hugo-site --minify --gc
         env:
           HUGO_ENV: production
           

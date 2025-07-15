@@ -1,7 +1,4 @@
 {{ range .Pages }}
-  <script>
-    console.log( {{ .Params.thumb }} );
-  </script>
   <div class="swiper-slide" hx-get="{{ .Permalink }}summary.html" hx-target="#htmlSummary" data-loc="{{ .Params.location }}">
       {{ with resources.Get .Params.thumb }}
         {{ with .Fill "300x200 q100 Center" }}
