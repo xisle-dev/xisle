@@ -6,7 +6,7 @@ media:
     categories: [ document ]
   - name: images # Note: 'name' key is required here
     label: Images
-    input: _cms/assets/images
+    input: _cms/assets/media/images
     output: /images
     extensions: [ png, webp, jpg, jpeg ]
 content:
