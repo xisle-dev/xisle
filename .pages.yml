@@ -1,19 +1,19 @@
 media:
   - name: files
     label: Files
-    input: _content/documents
+    input: _cms/assets/documents
     output: /documents
     categories: [ document ]
   - name: images # Note: 'name' key is required here
     label: Images
-    input: _content/images
+    input: _cms/assets/images
     output: /images
     extensions: [ png, webp, jpg, jpeg ]
 content:
   - name: areas
     label: Areas
     type: collection
-    path: '_content/areas'
+    path: '_cms/content/areas'
     filename: '{primary}.md'
     view:
       fields: [ title, published, date ]
@@ -54,7 +54,7 @@ content:
 
   - name: pins
     label: Pins
-    path: _content/pins
+    path: _cms/content/pins
     filename: '{primary}.md'
     type: collection
     fields:
