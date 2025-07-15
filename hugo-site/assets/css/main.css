@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@source "hugo_stats.json";
+
+/* Apply Inter font to the entire body */
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0px;
+  overflow: hidden; /* Prevent scrolling due to Cesium's full-screen nature */
+}
+/* Ensure Cesium container takes full viewport height */
+#cesiumContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.swiper-slide {
+  pointer-events: auto;
+}
+.swiper-pagination-bullet{
+  pointer-events: auto;
+}
+
+.swiper-button-prev {
+  pointer-events: auto;
+}
+.swiper-button-next {
+  pointer-events: auto;
+}
+.widget {
+  pointer-events: auto;
+  color: white;
+}
+
+.cesium-widget-credits {
+  display: none; /* Hide Cesium credits */
+}
+
+image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+  border-radius: 15px;
+}

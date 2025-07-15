@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.147.9">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <link
+      rel="icon"
+      href="/images/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
+
+
+    
+    
+    
+      
+        
+          <script src="/js/main.7337260a0d6008625673dba19d70868c810f66079192c70cd0cb8f05f44b17db.js" integrity="sha256-czcmCg1gCGJWc9uhnXCGjIEPZgeRkscM0MuPBfRLF9s=" crossorigin="anonymous"></script>
+        
+      
+    
+  
+
+        
+    <link
+      rel="stylesheet"
+      href="/css/main.bd5d66ae95563cc06deff1b0f80ebd772b972bc4b6fccff3b89dc0146809bb2f.css"
+      integrity="sha256-vV1mrpVWPMBt7/Gw&#43;A69dyuXK8S2/M/zuJ3AFGgJuy8="
+      crossorigin="anonymous"
+    />
+       
+  </head>
+
+  <body>
+    <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
+    <div class="overlay">
+      <div class="swiper mySwiper " id="test">
+        <div
+          id="nav"
+          class="swiper-wrapper"
+          hx-get="/areas/slides.html"
+          hx-swap="innerHTML"
+          hx-trigger="load"
+        ></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+      <div id="htmlSummary" class="widget"></div>
+    </div>
+    <div class="absolute bottom-0 right-0 bg-white-300 bg-opacity-75 widget">
+      <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
+      <p><strong>Longitude:</strong> <span id="longitude">N/A</span></p>
+      <p><strong>Altitude:</strong> <span id="altitude">N/A</span></p>
+    </div>
+</div>
+  </body>
+
+</html>

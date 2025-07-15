@@ -1,0 +1,16 @@
+
+asdASDASDFSADF
+<div class="flex bg-yellow-500 bg-opacity-25" >
+ <div class="w-14 flex-none" width="300" height="200">    <div class="image-container">
+      {{ with resources.Get .Params.thumb }}
+        {{ with .Fill "300x200 q100 Center" }}
+          <img src="{{ .RelPermalink }}"  width={{ .Width }} height={{ .Height }} alt="{{ .Title }}">
+        {{ end }}
+      {{ end }}
+      <div class="image-label">{{ .Title }} </div>
+    </div>
+</div>
+  <div class="w-64 flex-1 bg-blue-900">{{ .Summary }}</div>
+  <div class="w-32 flex-1 ...">Ipso lirum</div>
+
+</div>

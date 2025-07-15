@@ -1,0 +1,57 @@
+baseURL = 'https://xisle.net/'
+languageCode = 'en-us'
+title = 'X/Isle'
+theme = "xisle"
+publishDir = "../_hugo-output"
+
+ [module]
+  [[module.mounts]]
+    source = "../_cms/content"
+    target = "content"
+
+  [[module.mounts]]
+    source = "../_cms/assets/media"
+    target = "assets"
+
+  [[module.mounts]]
+    source = 'themes/xisle/assets'
+    target = 'assets'  
+    
+  [[module.mounts]]
+    source = "hugo_stats.json"
+    target = "assets/watching/hugo_stats.json"
+
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/watching/hugo_stats\.json'
+    target = 'main\.css'    
+    [[build.cachebusters]]
+    source = '(postcss|tailwind)\.config\.js'
+    target = 'css'
+
+[mediaTypes]
+[mediaTypes."application/geojson"]
+  suffixes = ["json"]
+
+[outputFormats]
+  [outputFormats.geojson]
+    baseName = "locations"
+    isPlainText = true
+    mediaType = "application/geojson"
+
+  [outputFormats.summary]
+    baseName = "summary"
+    isHtml = true
+    mediaType = "text/html"
+
+  [outputFormats.slides]
+    baseName = "slides"
+    isHtml = true
+    mediaType = "text/html"
+
+[outputs]
+  home = ['html', 'geojson']
+  page = ['html', 'summary']  
+  section = ['html', 'geojson', 'slides', 'summary']

@@ -1,19 +1,8 @@
 name = "xisle" # Replace with a unique name for your Worker
-main = "hono/src/index.tsx"      # Path to your Worker's entry point JavaScript file
 compatibility_date = "2024-06-23" # Use the current date or a recent one
-
 # This is the crucial part for static assets
 [assets]
-directory = "_output"
+directory = "_hugo-output"
 not_found_handling = "single-page-application"
-run_worker_first = [
-    "/*",
-    "!/areas/*",
-    "!/pins/*",
-    "!/images/*", 
-    "!/css/*",
-    "!/js/*", 
-    "!/locations.json" 
-    ]
 
 # CF API Token     JGwEYWgTadxN_I761rDMT36q7R7eX1net2YxOL7N

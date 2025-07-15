@@ -1,9 +1,0 @@
-{{ define "main" }}
-  {{ .Content }}
-  {{ range site.RegularPages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-    <h2>Dangers</h2>
-    <p>{{ .Params.dangers | markdownify }}  </p>
-  {{ end }}
-{{ end }}

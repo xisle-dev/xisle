@@ -1,0 +1,13 @@
+{{ range .Pages }}
+  <script>
+    console.log( {{ .Params.thumb }} );
+  </script>
+  <div class="swiper-slide" hx-get="{{ .Permalink }}summary.html" hx-target="#htmlSummary" data-loc="{{ .Params.location }}">
+      {{ with resources.Get .Params.thumb }}
+        {{ with .Fill "300x200 q100 Center" }}
+          <img src="{{ .RelPermalink }}"  width={{ .Width }} height={{ .Height }} alt="{{ .Title }}">
+        {{ end }}
+      {{ end }}
+      <div class="image-label">{{ .Title }} </div>
+  </div>
+{{ end }}
