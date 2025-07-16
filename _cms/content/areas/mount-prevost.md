@@ -1,5 +1,5 @@
 ---
-thumb: /images/Malahat/malahat-1.jpg
+thumb: /images/Prevost/WhatsApp Image 2025-03-27 at 11.39.18_664104de.jpg
 draft: false
 date: 2025-06-24
 title: Mount Prevost
