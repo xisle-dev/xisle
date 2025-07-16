@@ -20,6 +20,12 @@ jobs:
         with:
           hugo-version: 'latest'
 
+      - name: install tailwindcli
+        run:
+          curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/${TAILWIND_CLI_VERSION}/download/tailwindcss-${CLI_ARCH}
+          chmod +x tailwindcss-linux-x64
+          mv tailwindcss-linux-x64 tailwindcss
+
       - name: Build Hugo Site
         run: hugo --destination ../_hugo-output --source hugo-site --minify --gc
         env:
