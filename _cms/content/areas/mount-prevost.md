@@ -7,4 +7,6 @@ location: '{"location":{"latitude":48.83041646435416,"longitude":-123.7694534653
 ---
 # Mount Prevost
 
-The premier flying site on Vancouver Island
+The premier flying site on Vancouver Island.
+
+Launched in three directs and a great lz!
