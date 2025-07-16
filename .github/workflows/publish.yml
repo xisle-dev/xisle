@@ -22,14 +22,27 @@ jobs:
 
       - name: install tailwindcli
         run:
-          TAILWIND_CLI_VERSION="v4.1.11"                 
-          
-          curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_CLI_VERSION}/tailwindcss-linux-x64
+          TAILWIND_CLI_VERSION="v4.1.11"
+          INSTALL_DIR="${{ runner.temp }}/tailwindcss-cli" 
 
-          chmod +x tailwindcss-linux-x64
+          mkdir -p "$INSTALL_DIR"
 
-          mv tailwindcss-linux-x64 tailwindcss
+          if [ "${{ runner.os }}" == "Linux" ]; then
+            CLI_ARCH="linux-x64"
+          elif [ "${{ runner.os }}" == "macOS" ]; then
+            CLI_ARCH="macos-x64"
+          elif [ "${{ runner.os }}" == "Windows" ]; then
+            CLI_ARCH="windows-x64"
+          else
+            echo "Unsupported runner OS"
+            exit 1
+          fi
 
+          curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/${TAILWIND_CLI_VERSION}/tailwindcss-${CLI_ARCH}
+          chmod +x tailwindcss-${CLI_ARCH}
+          mv tailwindcss-${CLI_ARCH} "$INSTALL_DIR/tailwindcss"
+
+          echo "$INSTALL_DIR" >> $GITHUB_PATH # Add the directory to PATH for subsequent steps
       - name: Build Hugo Site
         run: hugo --destination ../_hugo-output --source hugo-site --minify --gc
         env:
