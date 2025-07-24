@@ -5,8 +5,9 @@
 
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
-    {{ $path := printf "%s/**" $galleryFolder }}
-    {{ warnf "c %s" $path}}
+{{ warnf "1 %s" $path}}
+{{ $path := printf "%s/**" $galleryFolder }}
+    {{ warnf "b %s" $path}}
     {{ range resources.Match $path }}
       {{ warnf "c"}}
       {{ $images = $images | append . }}
