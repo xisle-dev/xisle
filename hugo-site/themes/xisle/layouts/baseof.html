@@ -84,6 +84,8 @@ hugo.IsDevelopment }}
 </head>
 
   <body>
+    {{ block "main" . }}
+    {{ end }}
     <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
     <div class="overlay">
       {{ if .Params.galleryFolder }}
