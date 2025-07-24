@@ -2,6 +2,7 @@
 {{ $galleryFolder := .galleryFolder }}
 {{ $images := slice }}
 
+{{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
     {{ $path := printf "%s/**" $galleryFolder }}
     {{ range resources.Match $path }}
