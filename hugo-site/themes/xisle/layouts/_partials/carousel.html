@@ -2,24 +2,25 @@
 {{ $galleryFolder := .galleryFolder }}
 {{ $images := slice }}
 
+{{ with resources.Get "images/Dallas Road/Dallas Road 1.jpg" }}
+  <img src="{{ .RelPermalink}}">/>
+{{ end }}
+
+{{ with resources.Get $galleryFolder }}
+  <img src="{{ .RelPermalink}}">/>
+{{ end }}
+
 
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
-{{ warnf "1"}}
-{{ $path := printf "%s/**" $galleryFolder }}
-    {{ warnf "b %s" $path}}
+    {{ warnf "galleryFolder %s" $galleryFolder}}
+    {{ $path := printf "%s/**" $galleryFolder }}
     {{ range resources.Match $path }}
-      {{ warnf "c"}}
-      {{ $images = $images | append . }}
-      {{ warnf "d"}}
+        {{ $images = $images | append . }}
     {{ end }}
-        {{ warnf "e"}}
-        {{ else }}
-        {{ warnf "f"}}
-        {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
-        {{ warnf "g"}}
-        {{ end }}
-        {{ warnf "g"}}
+{{ else }}
+    {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
+{{ end }}
 
 {{ with resources.Get "images/Dallas Road/Dallas Road 1.jpg" }}
   <img src="{{ .RelPermalink}}">/>
@@ -28,10 +29,8 @@
 
 <div class="carousel-container">
     <div class="carousel-track">
-        {{ warnf "i"}}
         {{ range $index, $image := $images }}
-        {{ warnf "j"}}
-        {{/* Define image variations based on target heights/widths */}}
+            {{/* Define image variations based on target heights/widths */}}
             {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
             {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
             {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
