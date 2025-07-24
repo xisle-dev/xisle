@@ -55,10 +55,17 @@ jobs:
           mv tailwindcss-${CLI_ARCH} "$INSTALL_DIR/tailwindcss"
 
           echo "$INSTALL_DIR" >> $GITHUB_PATH # Add the directory to PATH for subsequent steps
+
+      - name: Build Hugo Site
+        run: hugo config mounts --source hugo-site
+        env:
+          HUGO_ENV: production
+  
+ 
       - name: List Assets Directory
         run: |
           echo "Listing contents of assets/ folder:"
-          ls -R assets/
+          ls -R .
           echo "--- End assets listing ---"          
 
       - name: Build Hugo Site
@@ -69,7 +76,7 @@ jobs:
       - name: List Assets Directory
         run: |
           echo "Listing contents of assets/ folder:"
-          ls -R assets/
+          ls -R .
           echo "--- End assets listing ---"      
       
       - name: dir
