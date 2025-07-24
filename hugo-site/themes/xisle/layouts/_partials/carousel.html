@@ -5,14 +5,13 @@
 
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
-    {{ warnf "a"}}
     {{ $path := printf "%s/**" $galleryFolder }}
-    {{ warnf "b"}}
+    {{ warnf "c %s" $path}}
     {{ range resources.Match $path }}
-    {{ warnf "c"}}
-        {{ $images = $images | append . }}
-        {{ warnf "d"}}
-        {{ end }}
+      {{ warnf "c"}}
+      {{ $images = $images | append . }}
+      {{ warnf "d"}}
+    {{ end }}
         {{ warnf "e"}}
         {{ else }}
         {{ warnf "f"}}
