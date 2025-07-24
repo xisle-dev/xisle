@@ -69,14 +69,14 @@ jobs:
           echo "--- End assets listing ---"          
 
       - name: Build Hugo Site
-        run: hugo --destination ../_hugo-output --source hugo-site --minify --gc
+        run: hugo --destination ../_hugo-output --source hugo-site --minify --gc --verbose --logLevel debug
         env:
           HUGO_ENV: production
           
       - name: List Assets Directory
         run: |
           echo "Listing contents of assets/ folder:"
-          ls -R ../_cms/assets/media
+          ls -R ./_cms/assets/media
           echo "--- End assets listing ---"      
       
       - name: t
