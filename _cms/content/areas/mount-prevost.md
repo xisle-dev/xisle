@@ -1,4 +1,5 @@
 ---
+thumb: /images/Prevost/WhatsApp Image 2025-03-27 at 11.39.18_664104de.jpg
 gallery: Prevost
 thumb: /images/Malahat/malahat-1.jpg
 draft: false
