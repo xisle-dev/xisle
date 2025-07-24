@@ -25,6 +25,7 @@
     {{ warnf "h" }}
 
     {{ range resources.Match $path }}
+        {{ warnf "i" }} 
         {{ $images = $images | append . }}
     {{ end }}
 {{ else }}
