@@ -79,6 +79,10 @@ jobs:
           ls -R .
           echo "--- End assets listing ---"      
       
+      - name: t
+        run: |
+          cat ./_hugo-output/areas/dallas-road/index.html
+          
       - name: dir
         run: ls
 
