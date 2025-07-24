@@ -2,6 +2,7 @@
 {{ $galleryFolder := .galleryFolder }}
 {{ $images := slice }}
 
+
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
     {{ $path := printf "%s/**" $galleryFolder }}
@@ -11,6 +12,11 @@
 {{ else }}
     {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
 {{ end }}
+
+{{ with resources.Get "images/Dallas Road/Dallas Road 1.jpg" }}
+  <img src="{{ .RelPermalink}}">/>
+{{ end }}
+
 
 <div class="carousel-container">
     <div class="carousel-track">
