@@ -76,7 +76,7 @@ jobs:
       - name: List Assets Directory
         run: |
           echo "Listing contents of assets/ folder:"
-          ls -R .
+          ls -R ../_cms/assets/media
           echo "--- End assets listing ---"      
       
       - name: t
