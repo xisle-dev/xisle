@@ -6,15 +6,16 @@
   <img src="{{ .RelPermalink}}">/>
 {{ end }}
 
-{{ with resources.Get $galleryFolder }}
-  <img src="{{ .RelPermalink}}">/>
-{{ end }}
 
 
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
     {{ warnf "galleryFolder %s" $galleryFolder}}
     {{ $path := printf "%s/**" $galleryFolder }}
+    {{ with resources.Get (printf "%s" $galleryFolder "Dallas Road 1.jpg" }}
+    <img src="{{ .RelPermalink}}">/>
+    {{ end }}
+
     {{ range resources.Match $path }}
         {{ $images = $images | append . }}
     {{ end }}
