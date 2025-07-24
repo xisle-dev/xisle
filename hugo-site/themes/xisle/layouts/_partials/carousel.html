@@ -2,19 +2,27 @@
 {{ $galleryFolder := .galleryFolder }}
 {{ $images := slice }}
 
+{{ warnf "a" }}
 {{ with resources.Get "images/Dallas Road/Dallas Road 1.jpg" }}
   <img src="{{ .RelPermalink}}">/>
-{{ end }}
+  {{ warnf "b" }}
+  {{ end }}
+  {{ warnf "c" }}
 
 
 
 {{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
+{{ warnf "d" }}
     {{ warnf "galleryFolder %s" $galleryFolder}}
+    {{ warnf "e" }}
     {{ $path := printf "%s/**" $galleryFolder }}
+    {{ warnf "f" }}
     {{ with resources.Get (printf "%s" $galleryFolder "Dallas Road 1.jpg") }}
+    {{ warnf "f" }}
     <img src="{{ .RelPermalink}}">/>
     {{ end }}
+    {{ warnf "f" }}
 
     {{ range resources.Match $path }}
         {{ $images = $images | append . }}
