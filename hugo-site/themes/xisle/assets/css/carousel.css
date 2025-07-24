@@ -1,0 +1,143 @@
+/* Base Container Styles */
+.carousel-container {
+    position: absolute;
+    width: 100%;
+    overflow: hidden; /* This is crucial for hiding overflowed slides */
+    margin: 20px 0;
+    min-height: 120px; /* Base min-height for controls/padding */
+    display: flex; /* Helps vertically center the track */
+    align-items: center; /* Vertically centers the track within the container */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%; /* Ensure track fills container height */
+    align-items: center; /* Vertically center images within the track */
+    gap: 10px; /* Gap between flex items (carousel-slide) */
+    flex-wrap: nowrap; /* Crucial: ensures items don't wrap and overflow horizontally */
+    justify-content: flex-start; /* Default alignment */
+}
+
+/* Base Slide Styles (for all screens) */
+.carousel-slide {
+    display: flex;
+    justify-content: center; /* Horizontally center image in its slide */
+    align-items: center;     /* Vertically center image in its slide */
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    transform: scale(0.9); /* Initial size for non-selected images */
+    transition: transform 0.5s ease-in-out; /* Removed margin from transition, as gap handles it */
+    flex-grow: 0;
+    flex-shrink: 0; /* Important: Prevents slides from shrinking below their content size */
+    flex-basis: auto; /* This makes the slide's width determined by its content */
+}
+
+.carousel-slide.active {
+    transform: scale(1.1); /* Highlight active image by making it 10% bigger */
+    z-index: 1; /* Bring active image to front */
+}
+
+.carousel-slide img {
+    max-width: 100%; /* Image fills its slide container */
+    max-height: 100%; /* Image fills its slide container */
+    object-fit: contain; /* Maintain aspect ratio and fit within the container */
+    display: block;
+    box-sizing: border-box;
+    transition: all 0.5s ease-in-out; /* For smooth image resizing */
+}
+
+
+/* Media Queries for Image Sizing and Container Height */
+
+/* < 600px (Small Screens) */
+@media (max-width: 599px) {
+    .carousel-container {
+        min-height: 120px;
+    }
+    .carousel-slide img {
+        height: 100px; /* Target actual image height */
+        width: auto;   /* Width adjusts proportionally */
+    }
+    .carousel-track {
+        /* No specific justify-content needed here, as JS handles centering */
+    }
+}
+
+/* 600px - 1024px (Medium Screens) */
+@media (min-width: 600px) and (max-width: 1024px) {
+    .carousel-container {
+        min-height: 220px; /* Base for 200px images + padding/controls */
+    }
+    .carousel-slide img {
+        height: 200px; /* Target actual image height */
+        width: auto;   /* Width adjusts proportionally */
+    }
+    .carousel-track {
+        /* No specific justify-content needed here, as JS handles centering */
+    }
+}
+
+/* > 1024px (Large Screens) */
+@media (min-width: 1025px) {
+    .carousel-container {
+        min-height: 320px; /* Min height for 300px images */
+    }
+    .carousel-slide img {
+        height: 300px; /* Target actual image height */
+        width: auto;   /* Width adjusts proportionally */
+    }
+    .carousel-track {
+        /* No specific justify-content needed here, as JS handles centering */
+    }
+}
+
+
+/* Navigation Buttons */
+.carousel-prev-btn,
+.carousel-next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+.carousel-prev-btn {
+    left: 10px;
+}
+
+.carousel-next-btn {
+    right: 10px;
+}
+
+/* Dots Navigation */
+.carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-dots .dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+    background-color: rgba(255, 255, 255, 1);
+}

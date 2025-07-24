@@ -6,4 +6,4 @@ thumb: /images/Malahat/malahat-1.jpg
 ---
 # Stinky Fish
 
-Despite the name the are is really quite fresh. And big!
+Despite the name the air is really quite fresh. And big!

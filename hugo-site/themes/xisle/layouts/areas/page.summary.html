@@ -4,9 +4,11 @@
   {{ with resources.Get .Params.thumb }} 
   {{ with .Fill "300x200 q100 Center" }}
   <img
-    class="border-2 border-blue-500 rounded-xl"
+    class="border-2 border-blue-500 rounded-xl:"
     src="{{ .RelPermalink }}"
   />
   {{ end }} {{ end }}
 </div>
 <div class="max-h-200 m-5">{{ .Content }}</div>
+<div>
+</div>

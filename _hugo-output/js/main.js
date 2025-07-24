@@ -6,38 +6,6 @@
     console.log(">" + window.location.path);
     htmx.on("htmx:afterSettle", function(evt) {
       if (evt.target.id === "nav") {
-        var swiper = new Swiper(".swiper", {
-          direction: "horizontal",
-          slidesPerView: "1",
-          spaceBetween: 30,
-          centeredSlides: false,
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev"
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true
-          },
-          breakpoints: {
-            "@0.00": {
-              slidesPerView: 3,
-              spaceBetween: 10
-            },
-            "@0.50": {
-              slidesPerView: 6,
-              spaceBetween: 20
-            },
-            "@1.00": {
-              slidesPerView: 9,
-              spaceBetween: 40
-            },
-            "@1.50": {
-              slidesPerView: 12,
-              spaceBetween: 50
-            }
-          }
-        });
       }
     });
   });

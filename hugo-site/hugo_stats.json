@@ -3,6 +3,7 @@
     "tags": [
       "a",
       "body",
+      "button",
       "div",
       "h1",
       "head",
@@ -13,7 +14,9 @@
       "link",
       "meta",
       "p",
+      "picture",
       "script",
+      "source",
       "span",
       "strong",
       "table",
@@ -27,11 +30,19 @@
     ],
     "classes": [
       "absolute",
+      "active",
       "bg-opacity-75",
       "bg-white-300",
       "border-2",
       "border-blue-500",
       "bottom-0",
+      "carousel-container",
+      "carousel-dots",
+      "carousel-next-btn",
+      "carousel-prev-btn",
+      "carousel-slide",
+      "carousel-track",
+      "dot",
       "embed",
       "flex-none",
       "float-left",
@@ -44,13 +55,8 @@
       "overlay",
       "right-0",
       "rounded-xl",
-      "swiper",
-      "swiper-button-next",
-      "swiper-button-prev",
-      "swiper-pagination",
-      "swiper-scrollbar",
+      "rounded-xl:",
       "swiper-slide",
-      "swiper-wrapper",
       "video-player",
       "w-64",
       "widget",
@@ -59,13 +65,9 @@
     "ids": [
       "altitude",
       "cesiumContainer",
-      "htmlSummary",
       "latitude",
       "longitude",
-      "mount-prevost",
-      "nav",
-      "stinky-fish",
-      "test"
+      "stinky-fish"
     ]
   }
 }
