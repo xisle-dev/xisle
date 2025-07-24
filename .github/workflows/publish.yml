@@ -69,7 +69,9 @@ jobs:
           echo "--- End assets listing ---"          
 
       - name: Build Hugo Site
-        run: hugo --destination ../_hugo-output --source hugo-site --minify --gc --logLevel debug
+        run: |
+          cd hugo-site
+          hugo --destination ../_hugo-output --minify --gc --logLevel debug
         env:
           HUGO_ENV: production
           
