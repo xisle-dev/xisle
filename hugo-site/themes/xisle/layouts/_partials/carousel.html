@@ -12,7 +12,7 @@
 {{ with $galleryFolder }}
     {{ warnf "galleryFolder %s" $galleryFolder}}
     {{ $path := printf "%s/**" $galleryFolder }}
-    {{ with resources.Get (printf "%s" $galleryFolder "Dallas Road 1.jpg" }}
+    {{ with resources.Get (printf "%s" $galleryFolder "Dallas Road 1.jpg") }}
     <img src="{{ .RelPermalink}}">/>
     {{ end }}
 
