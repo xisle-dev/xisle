@@ -18,11 +18,11 @@
     {{ warnf "e" }}
     {{ $path := printf "%s/**" $galleryFolder }}
     {{ warnf "f" }}
-    {{ with resources.Get (printf "%s %s" $galleryFolder "Dallas Road 1.jpg") }}
-    {{ warnf "f" }}
+    {{ with resources.Get (printf "%s/Dallas Road 1.jpg" $galleryFolder) }}
+    {{ warnf "g" }}
     <img src="{{ .RelPermalink}}">/>
     {{ end }}
-    {{ warnf "f" }}
+    {{ warnf "h" }}
 
     {{ range resources.Match $path }}
         {{ $images = $images | append . }}
