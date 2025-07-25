@@ -24,9 +24,8 @@
     {{ end }}
     {{ warnf "h" }}
 
-    {{ range resources.Match "/images/*" }}
-        {{ warnf printf "i: %s" .RelPermalink }}
-        
+    {{ range resources.Match $path }}
+        {{ warnf  "i" }}
         {{ $images = $images | append . }}
     {{ end }}
 {{ else }}
