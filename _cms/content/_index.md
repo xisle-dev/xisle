@@ -1,5 +1,5 @@
 ---
-galleryFolder: /images/dallas-road
+galleryFolder: /images/dallas road
 ---
 
 # What is Lorem Ipsum?
