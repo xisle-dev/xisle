@@ -2,48 +2,21 @@
 {{ $galleryFolder := .galleryFolder }}
 {{ $images := slice }}
 
-{{ warnf "a" }}
-{{ with resources.Get "images/Dallas Road/Dallas Road 1.jpg" }}
-  <img src="{{ .RelPermalink}}">/>
-  {{ warnf "b" }}
-  {{ end }}
-  {{ warnf "c" }}
-
-
-
-{{ warnf "galleryFolder %s" $galleryFolder}}
 {{ with $galleryFolder }}
-{{ warnf "d" }}
-    {{ warnf "galleryFolder %s" $galleryFolder}}
-    {{ warnf "e" }}
     {{ $path := printf "%s/**" $galleryFolder }}
-    {{ warnf "f" }}
-    {{ with resources.Get (printf "%s/dallas-road.jpg" $galleryFolder) }}
-    {{ warnf "g" }}
-    <img src="{{ .RelPermalink}}">/>
-    {{ end }}
-    {{ warnf "h" }}
+    {{ $images := resources.Match $path }}
 
-    {{ range resources.Match $path }}
-        {{ warnf  "i" }}
-        {{ $images = $images | append . }}
-    {{ end }}
-{{ else }}
-    {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
-{{ end }}
+    <div class="carousel-container">
+        <div class="carousel-track">
+            {{ range $index, $image := $images }}
+               {{ if eq $image.ResourceType "image"  }}
+                {{ $image := $image.Resize "x300" }} 
 
-{{ with resources.Get "/images/dallas-road/dallas-road 1.jpg" }}
-  <img src="{{ .RelPermalink}}">/>
-{{ end }}
-
-
-<div class="carousel-container">
-    <div class="carousel-track">
-        {{ range $index, $image := $images }}
+                {{/* Define image variations based on target heights/widths */}}
             {{/* Define image variations based on target heights/widths */}}
-            {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
-            {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
-            {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
+                {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
+                {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
+                {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
 
             <div class="carousel-slide {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}">
                 <picture>
@@ -62,8 +35,13 @@
                          height="{{ $largeImagePortrait.Height }}">
                 </picture>
             </div>
+            {{ end }}
         {{ end }}
     </div>
+
+{{ else }}
+    {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
+{{ end }}
 
     <button class="carousel-prev-btn">&lt;</button>
     <button class="carousel-next-btn">&gt;</button>

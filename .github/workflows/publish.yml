@@ -15,12 +15,6 @@ jobs:
         with:
           submodules: 'recusive'
           fetch-depth: 0
-      
-      - name: Setup Latest Version of Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest'
-          extended: true
 
       - name: install tailwindcli
         run:
@@ -58,32 +52,17 @@ jobs:
 
           echo "$INSTALL_DIR" >> $GITHUB_PATH # Add the directory to PATH for subsequent steps
 
-      - name: Build Hugo Site
-        run: hugo config mounts --source hugo-site
-        env:
-          HUGO_ENV: production
-  
- 
-      - name: List Assets Directory
-        run: |
-          echo "Listing contents of assets/ folder:"
-          ls -R .
-          echo "--- End assets listing ---"          
 
+      - name: Setup Latest Version of Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true 
+ 
       - name: Build Hugo Site
         run: hugo --destination ../_hugo-output --source hugo-site --minify --gc --logLevel debug
         env:
           HUGO_ENV: production
-          
-      - name: List Assets Directory
-        run: |
-          echo "Listing contents of assets/ folder:"
-          ls -R ./_cms/assets/media
-          echo "--- End assets listing ---"      
-      
-      - name: t
-        run: |
-          cat ./_hugo-output/areas/dallas-road/index.html
           
       - name: dir
         run: ls
