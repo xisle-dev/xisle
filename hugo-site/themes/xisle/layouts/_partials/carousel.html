@@ -24,7 +24,7 @@
     {{ end }}
     {{ warnf "h" }}
 
-    {{ range resources.Match "/images/Dallas Road/*" }}
+    {{ range resources.Match "/images/*" }}
         {{ warnf "i" }} 
         {{ $images = $images | append . }}
     {{ end }}
