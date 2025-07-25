@@ -32,6 +32,8 @@
     flex-shrink: 0; /* Important: Prevents slides from shrinking below their content size */
     flex-basis: auto; /* This makes the slide's width determined by its content */
     margin: 0 10px;
+    border-width: 2px;
+    border-color: black
 }
 
 .carousel-slide.active {
