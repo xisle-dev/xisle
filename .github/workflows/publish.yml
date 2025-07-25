@@ -19,6 +19,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
+          extended: true
 
       - name: install tailwindcli
         run:
@@ -69,9 +70,7 @@ jobs:
           echo "--- End assets listing ---"          
 
       - name: Build Hugo Site
-        run: |
-          cd hugo-site
-          hugo --destination ../_hugo-output --minify --gc --logLevel debug
+        run: hugo --destination ../_hugo-output --source hugo-site --minify --gc --logLevel debug
         env:
           HUGO_ENV: production
           
