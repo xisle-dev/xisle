@@ -14,7 +14,6 @@
     transition: transform 0.5s ease-in-out;
     height: 100%; /* Ensure track fills container height */
     align-items: center; /* Vertically center images within the track */
-    gap: 10px; /* Gap between flex items (carousel-slide) */
     flex-wrap: nowrap; /* Crucial: ensures items don't wrap and overflow horizontally */
     justify-content: flex-start; /* Default alignment */
 }
@@ -22,20 +21,22 @@
 /* Base Slide Styles (for all screens) */
 .carousel-slide {
     display: flex;
+    border-radius: 10px;
     justify-content: center; /* Horizontally center image in its slide */
     align-items: center;     /* Vertically center image in its slide */
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    transform: scale(0.9); /* Initial size for non-selected images */
-    transition: transform 0.5s ease-in-out; /* Removed margin from transition, as gap handles it */
+    transition: border-width 0.5s ease-in-out; /* Removed margin from transition, as gap handles it */
     flex-grow: 0;
     flex-shrink: 0; /* Important: Prevents slides from shrinking below their content size */
     flex-basis: auto; /* This makes the slide's width determined by its content */
+    margin: 0 10px;
 }
 
 .carousel-slide.active {
-    transform: scale(1.1); /* Highlight active image by making it 10% bigger */
+    border-width: 5px;
+    border-color: white;
     z-index: 1; /* Bring active image to front */
 }
 
