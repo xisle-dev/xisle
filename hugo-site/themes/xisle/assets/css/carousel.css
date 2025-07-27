@@ -53,6 +53,48 @@
     transition: all 0.5s ease-in-out; /* For smooth image resizing */
 }
 
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for readability */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 10px 20px; /* Adjusted padding for buttons */
+    box-sizing: border-box;
+    font-size: 600;
+  
+    /* Flexbox for layout */
+    display: flex;
+    justify-content: space-between; /* Pushes items to ends and center */
+    align-items: center; /* Vertically aligns items */
+  }
+  
+  /* New class for the caption text */
+  .caption-text {
+    text-align: center;
+    flex-grow: 1; /* Allows text to take up available space */
+    pointer-events: none; /* Makes text non-interactive */
+  }
+  
+  /* New class for the transparent buttons */
+  .caption-btn {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: white; /* SVG icon will inherit this color */
+    line-height: 0; /* Helps with icon alignment */
+  }
+
+  .slide-content-wrapper {
+    position: relative;
+    display: flex; /* This helps center the content if needed */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
 
 /* Media Queries for Image Sizing and Container Height */
 

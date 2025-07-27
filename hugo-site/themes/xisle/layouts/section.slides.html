@@ -1,10 +1,11 @@
-{{ $images := slice }}
+{{ $imageDefs := slice }}
 {{ range .Pages }}
+  {{ $title := .Params.title }}
   {{ with resources.Get .Params.thumb }}
-    {{ $images = $images | append . }}
+    {{ $imageDefs = $imageDefs | append (dict "image" . "title" $title )}}
   {{ end }}
 {{ end }}
 
 <div>
-{{ partial "carousel.html" (dict "context" . "images" $images ) }}
+{{ partial "carousel.html" (dict "context" . "imageDefs" $imageDefs ) }}
 </div>

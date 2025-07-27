@@ -1,18 +1,19 @@
 {{ $context := .context }}
-{{ $images := .images}}
+{{ $imageDefs := .imageDefs}}
 
 <div class="carousel-container">
   <div class="carousel-track">
-    {{ range $index, $image := $images }}
-      {{ if eq $image.ResourceType "image"  }}
+    {{ range $index, $imageDef := $imageDefs }}
+      {{ if eq $imageDef.image.ResourceType "image"  }}
         {{ warnf "Hello" }}
-        {{ $image := $image.Resize "x300" }} 
-        {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
-        {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
-        {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
+        {{ $image := $imageDef.image.Resize "x300" }} 
+        {{ $smallImagePortrait := $imageDef.image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
+        {{ $mediumImagePortrait := $imageDef.image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
+        {{ $largeImagePortrait := $imageDef.image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
 
         <div class="carousel-slide {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}">
-          <picture>
+          <div class="slide-content-wrapper">
+            <picture>
             <source media="(max-width: 599px)"
               srcset="{{ $smallImagePortrait.RelPermalink }}"
               width="{{ $smallImagePortrait.Width }}"
@@ -27,6 +28,20 @@
               width="{{ $largeImagePortrait.Width }}"
               height="{{ $largeImagePortrait.Height }}">
           </picture>
+          <div class="carousel-caption">
+            <button class="caption-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </button>
+          
+            <span class="caption-text">{{ $imageDef.title }}</span>
+          
+            <button class="caption-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>            </button>
+          </div>        </div>
         </div>
       {{ end }}
     {{ end }}
@@ -36,7 +51,7 @@
 <button class="carousel-next-btn">&gt;</button>
 
 <div class="carousel-dots">
-  {{ range $index, $image := $images }}
+  {{ range $index, $imageDef := $imageDefs }}
     <span class="dot {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}"></span>
   {{ end }}
 </div>
