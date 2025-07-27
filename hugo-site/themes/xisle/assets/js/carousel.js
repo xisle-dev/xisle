@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initCarousel() {
     // ... (Your existing console.logs for initial script loading) ...
 
     const carouselContainers = document.querySelectorAll('.carousel-container');
@@ -323,4 +323,4 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial carousel update
         updateCarousel();
     });
-});
+};

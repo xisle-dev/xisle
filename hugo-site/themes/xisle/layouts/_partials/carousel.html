@@ -1,54 +1,43 @@
 {{ $context := .context }}
-{{ $galleryFolder := .galleryFolder }}
-{{ $images := slice }}
+{{ $images := .images}}
 
-{{ with $galleryFolder }}
-    {{ $path := printf "%s/**" $galleryFolder }}
-    {{ $images := resources.Match $path }}
+<div class="carousel-container">
+  <div class="carousel-track">
+    {{ range $index, $image := $images }}
+      {{ if eq $image.ResourceType "image"  }}
+        {{ warnf "Hello" }}
+        {{ $image := $image.Resize "x300" }} 
+        {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
+        {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
+        {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
 
-    <div class="carousel-container">
-        <div class="carousel-track">
-            {{ range $index, $image := $images }}
-               {{ if eq $image.ResourceType "image"  }}
-                {{ $image := $image.Resize "x300" }} 
+        <div class="carousel-slide {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}">
+          <picture>
+            <source media="(max-width: 599px)"
+              srcset="{{ $smallImagePortrait.RelPermalink }}"
+              width="{{ $smallImagePortrait.Width }}"
+              height="{{ $smallImagePortrait.Height }}">
+            <source media="(max-width: 1024px)" {{/* This applies from 600px up to 1024px */}}
+              srcset="{{ $mediumImagePortrait.RelPermalink }}"
+              width="{{ $mediumImagePortrait.Width }}"
+              height="{{ $mediumImagePortrait.Height }}">
+            <img src="{{ $largeImagePortrait.RelPermalink }}" {{/* Default for > 1024px */}}
+              alt="Gallery Image {{ add $index 1 }}"
+              loading="lazy"
+              width="{{ $largeImagePortrait.Width }}"
+              height="{{ $largeImagePortrait.Height }}">
+          </picture>
+        </div>
+      {{ end }}
+    {{ end }}
+</div>
 
-                {{/* Define image variations based on target heights/widths */}}
-            {{/* Define image variations based on target heights/widths */}}
-                {{ $smallImagePortrait := $image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
-                {{ $mediumImagePortrait := $image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}
-                {{ $largeImagePortrait := $image.Resize "x300" }}  {{/* For screens > 1024px, 300px height */}}
+<button class="carousel-prev-btn">&lt;</button>
+<button class="carousel-next-btn">&gt;</button>
 
-            <div class="carousel-slide {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}">
-                <picture>
-                    <source media="(max-width: 599px)"
-                            srcset="{{ $smallImagePortrait.RelPermalink }}"
-                            width="{{ $smallImagePortrait.Width }}"
-                            height="{{ $smallImagePortrait.Height }}">
-                    <source media="(max-width: 1024px)" {{/* This applies from 600px up to 1024px */}}
-                            srcset="{{ $mediumImagePortrait.RelPermalink }}"
-                            width="{{ $mediumImagePortrait.Width }}"
-                            height="{{ $mediumImagePortrait.Height }}">
-                    <img src="{{ $largeImagePortrait.RelPermalink }}" {{/* Default for > 1024px */}}
-                         alt="Gallery Image {{ add $index 1 }}"
-                         loading="lazy"
-                         width="{{ $largeImagePortrait.Width }}"
-                         height="{{ $largeImagePortrait.Height }}">
-                </picture>
-            </div>
-            {{ end }}
-        {{ end }}
-    </div>
-
-{{ else }}
-    {{ errorf "The 'galleryFolder' parameter is required for the carousel partial. Please set it in your front matter or pass it correctly." }}
-{{ end }}
-
-    <button class="carousel-prev-btn">&lt;</button>
-    <button class="carousel-next-btn">&gt;</button>
-
-    <div class="carousel-dots">
-        {{ range $index, $image := $images }}
-            <span class="dot {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}"></span>
-        {{ end }}
-    </div>
+<div class="carousel-dots">
+  {{ range $index, $image := $images }}
+    <span class="dot {{ if eq $index 0 }}active{{ end }}" data-index="{{ $index }}"></span>
+  {{ end }}
+</div>
 </div>

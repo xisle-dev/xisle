@@ -40,6 +40,9 @@ ul {
   pointer-events: none;
 }
 
+.test {
+ pointer-events: all; /* Allow interaction with elements inside the overlay */
+}
 .overlay > * { /* Make children interactive */
   pointer-events: auto;
 }

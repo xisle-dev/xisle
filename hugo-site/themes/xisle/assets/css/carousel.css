@@ -1,5 +1,6 @@
 /* Base Container Styles */
 .carousel-container {
+    pointer-events: none;
     position: absolute;
     width: 100%;
     overflow: hidden; /* This is crucial for hiding overflowed slides */
@@ -20,6 +21,7 @@
 
 /* Base Slide Styles (for all screens) */
 .carousel-slide {
+    pointer-events: all;
     display: flex;
     border-radius: 10px;
     justify-content: center; /* Horizontally center image in its slide */

@@ -7,23 +7,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   htmx.on("htmx:afterSettle", function (evt) {
 
     if (evt.target.id === "nav") {
-
-
-
-      // const detailsElements = document.querySelectorAll(".acc-con details");
-      // detailsElements.forEach((details) => {
-      //   details.addEventListener("toggle", () => {
-      //     if (details.open) {
-      //       detailsElements.forEach((otherDetails) => {
-      //         if (otherDetails !== details && otherDetails.open) {
-      //           otherDetails.removeAttribute("open");
-      //         }
-      //       });
-      //     }
-      //   });
-      // });
-  
-
+      initCarousel();
 
     }
   });

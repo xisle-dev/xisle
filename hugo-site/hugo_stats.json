@@ -42,10 +42,10 @@
       "carousel-prev-btn",
       "carousel-slide",
       "carousel-track",
+      "dot",
       "embed",
       "flex-none",
       "float-left",
-      "image-label",
       "inset-0",
       "m-5",
       "magnific-video",
@@ -55,7 +55,6 @@
       "right-0",
       "rounded-xl",
       "rounded-xl:",
-      "swiper-slide",
       "video-player",
       "w-64",
       "widget",
@@ -66,6 +65,7 @@
       "cesiumContainer",
       "latitude",
       "longitude",
+      "nav",
       "stinky-fish"
     ]
   }

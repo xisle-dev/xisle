@@ -18,88 +18,28 @@
       type="image/svg+xml"
     />
     
-    {{ with resources.Get "/js/main.js" }}
-    {{$opts := dict
-      "minify" (not hugo.IsDevelopment)
-      "sourceMap" (cond hugo.IsDevelopment "external" "")
-      "targetPath" "js/main.js"
-    }}
-    {{ with . | js.Build $opts }}
-      {{ if hugo.IsDevelopment }}
-        <script src="{{ .RelPermalink }}"></script>
-      {{ else }}
-        {{ with . | fingerprint }}
-          <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-  {{ with resources.Get "/js/carousel.js" }}
-  {{$opts := dict
-    "minify" (not hugo.IsDevelopment)
-    "sourceMap" (cond hugo.IsDevelopment "external" "")
-    "targetPath" "js/carousel.js"
-  }}
-  {{ with . | js.Build $opts }}
-    {{ if hugo.IsDevelopment }}
-      <script src="{{ .RelPermalink }}"></script>
-    {{ else }}
-      {{ with . | fingerprint }}
-        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
+    {{ partial "main.css.html" . }}
+  
+    {{- $options := dict "targetPath" "js/bundle.js" -}}
+    {{- $jsBundle := resources.Match "/js/**.js" | resources.Concat "combined.js" | js.Build $options | resources.Minify | fingerprint -}}
 
 
-
-{{ with resources.Get "/css/main.css" }} {{ $opts := dict "minify" (not
-hugo.IsDevelopment)}} {{ with . | css.TailwindCSS $opts }} {{ if
-hugo.IsDevelopment }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" />
-{{ else }} {{ with . | fingerprint }}
-<link
-  rel="stylesheet"
-  href="{{ .RelPermalink }}"
-  integrity="{{ .Data.Integrity }}"
-  crossorigin="anonymous"
-/>
-{{ end }} {{ end }} {{ end }} {{ end }}
-
-
-{{ with resources.Get "/css/carousel.css" }} {{ $opts := dict "minify" (not
-hugo.IsDevelopment)}} {{ with . | css.TailwindCSS $opts }} {{ if
-hugo.IsDevelopment }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" />
-{{ else }} {{ with . | fingerprint }}
-<link
-  rel="stylesheet"
-  href="{{ .RelPermalink }}"
-  integrity="{{ .Data.Integrity }}"
-  crossorigin="anonymous"
-/>
-{{ end }} {{ end }} {{ end }} {{ end }}
-
-
-</head>
-
+  </head>
   <body>
     {{ block "main" . }}
     {{ end }}
     <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
     <div class="overlay">
-      {{ if .Params.galleryFolder }}
-      {{ partial "carousel.html" (dict "context" . "galleryFolder" .Params.galleryFolder) }}
-      {{ end }}
-        
-  
-    <div class="absolute bottom-0 right-0 bg-white-300 bg-opacity-75 widget">
-      <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
-      <p><strong>Longitude:</strong> <span id="longitude">N/A</span></p>
-      <p><strong>Altitude:</strong> <span id="altitude">N/A</span></p>
+      <div id="nav" hx-trigger="load" hx-get="/areas/slides.html" hx-swap="innerHTML"></div>
+      <div class="absolute bottom-0 right-0 bg-white-300 bg-opacity-75 widget">
+        <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
+        <p><strong>Longitude:</strong> <span id="longitude">N/A</span></p>
+        <p><strong>Altitude:</strong> <span id="altitude">N/A</span></p>
+      </div>
     </div>
 
-</div>
+
+    <script src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" defer></script>
 
   </body>
 

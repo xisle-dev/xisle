@@ -1,0 +1,11 @@
+{{ with resources.Match "/css/**.css" | resources.Concat "main.css" }}
+  {{ with . | css.TailwindCSS (dict "minify" (not hugo.IsDevelopment)) }}
+    {{ if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" />
+    {{ else }} 
+      {{ with . | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" />
+      {{ end }} 
+    {{ end }}
+  {{ end }}
+{{ end }}
