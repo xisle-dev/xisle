@@ -26,19 +26,11 @@
 
   </head>
   <body>
-    {{ block "main" . }}
-    {{ end }}
     <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
     <div class="overlay">
-      <div id="nav" hx-trigger="load" hx-get="/areas/slides.html" hx-swap="innerHTML"></div>
-      <div class="absolute bottom-0 right-0 bg-white-300 bg-opacity-75 widget">
-        <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
-        <p><strong>Longitude:</strong> <span id="longitude">N/A</span></p>
-        <p><strong>Altitude:</strong> <span id="altitude">N/A</span></p>
-      </div>
+      {{ block "main" . }}
+      {{ end }}
     </div>
-
-
     <script src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" defer></script>
 
   </body>

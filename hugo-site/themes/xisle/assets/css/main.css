@@ -71,3 +71,8 @@ image {
   pointer-events: auto;
 
 }
+
+
+.cesium-viewer-bottom {
+  display: none; /* Hide the bottom bar */
+}

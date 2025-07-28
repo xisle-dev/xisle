@@ -1,10 +1,15 @@
 baseURL = 'https://xisle.net/'
+
 languageCode = 'en-us'
 title = 'X/Isle'
 theme = "xisle"
 publishDir = "../_hugo-output"
 
- [module]
+[permalinks]
+  [permalinks.page]
+    areas = '/areas/:slugorcontentbasename/'
+
+[module]
   [[module.mounts]]
     source = "../_cms/content"
     target = "content"

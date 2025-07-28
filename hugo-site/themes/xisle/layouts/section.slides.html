@@ -1,8 +1,9 @@
 {{ $imageDefs := slice }}
 {{ range .Pages }}
   {{ $title := .Params.title }}
+  {{ $slug := (.RelPermalink | safeHTMLAttr) }}
   {{ with resources.Get .Params.thumb }}
-    {{ $imageDefs = $imageDefs | append (dict "image" . "title" $title )}}
+    {{ $imageDefs = $imageDefs | append (dict "image" . "title" $title "slug" $slug )}}
   {{ end }}
 {{ end }}
 
