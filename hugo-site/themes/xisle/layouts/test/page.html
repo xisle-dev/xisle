@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* html,body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+    
+        .list {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item {
+            border: 3px solid black;
+            border-radius: 12px;
+            margin: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .item.active {
+            border-width: 5px;
+            border-color: white;
+            z-index: 1;
+        }
+        
+        .item img {
+            display: block;
+            border-radius: 10px;
+        }
+
+        @media (orientation: landscape) {
+            .list  {
+              flex-direction: column;
+              align-items: flex-start;
+            }
+          
+          }
+          
+          @media (orientation: portrait) {
+            .list {
+              flex-direction: row; 
+              align-items: flex-start; 
+              overflow-x: auto;
+              white-space: nowrap;
+            }
+          
+          }        
+          */
+
+          
+    </style>
+</head>
+<body>
+    <div class="list">
+      {{ $i := resources.Get "/images/Holmes/holmes.jpg" }}
+      {{ $image := $i.Resize "200x133" }}  {{/* For screens > 1024px, 300px height */}}
+      {{ range $x := seq 20 }}
+       <div class="item {{ cond (eq $x 10) "active" "" }}"><img src="{{ $image.RelPermalink}}" alt=""/></div>
+       {{ end }}
+    </div>
+</body>
+</html>

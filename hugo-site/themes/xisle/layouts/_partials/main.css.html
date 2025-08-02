@@ -1,4 +1,6 @@
-{{ with resources.Match "/css/**.css" | resources.Concat "main.css" }}
+{{ $css := slice (resources.Get "/css/carousel.css") (resources.Get "/css/carousel.css") (resources.Get "/css/main.css") }}
+
+{{ with $css | resources.Concat "main.css" }}
   {{ with . | css.TailwindCSS (dict "minify" (not hugo.IsDevelopment)) }}
     {{ if hugo.IsDevelopment }}
       <link rel="stylesheet" href="{{ .RelPermalink }}" />

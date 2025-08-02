@@ -1,326 +1,222 @@
-function initCarousel() {
-    // ... (Your existing console.logs for initial script loading) ...
+document.addEventListener('DOMContentLoaded', () => {
 
-    const carouselContainers = document.querySelectorAll('.carousel-container');
-    // ... (Your existing console.log for containers found) ...
+    const carouselContainer = document.querySelector('.carousel-container');
+    const track = document.querySelector('.carousel-track');
+    const nextButton = document.querySelector('.next-arrow');
+    const prevButton = document.querySelector('.prev-arrow');
+    const nav = document.querySelector('.carousel-nav');
 
-    carouselContainers.forEach(container => {
-        // ... (Your existing console.logs for elements found inside container) ...
+    // --- STATE MANAGEMENT ---
+    let slides = Array.from(track.children);
+    let slideOffsets;
+    let totalPages;
+    const slidesPerPage = 3; // Or your desired number
+    let currentPage = 0;
+    
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
+    
+    let activeSlide = null;
+    let isLandscape = false;
+    
+    // --- CORE SETUP ---
+    const initializeCarousel = () => {
+        // Clear any previous state
+        nav.innerHTML = '';
+        track.style.transition = 'none';
+        track.style.transform = 'translate(0, 0)';
+        currentPage = 0;
+        currentTranslate = 0;
+        prevTranslate = 0;
 
-        const carouselTrack = container.querySelector('.carousel-track');
-        // ... (null checks and initial logs for track, slides, buttons, dots) ...
-
-        let slides = Array.from(container.querySelectorAll('.carousel-slide'));
-        let prevBtn = container.querySelector('.carousel-prev-btn');
-        let nextBtn = container.querySelector('.carousel-next-btn');
-        let dotsContainer = container.querySelector('.carousel-dots');
-        let dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.dot')) : [];
-
-
-        let currentIndex = 0;
-        let slideWidth = 0;
-        if (slides.length > 0) {
-             slideWidth = slides[0].offsetWidth;
-        }
-        // ... (initial slideWidth logs) ...
-
-        window.addEventListener('resize', () => {
-            slideWidth = slides[0] ? slides[0].offsetWidth : 0;
-            // IMPORTANT: If you resize during a drag animation, stop it
-            cancelAnimationFrame(animationID);
-            isDragging = false; // Reset drag state
-            updateCarousel();
+        checkOrientation();
+        slides = Array.from(track.children); // Re-query slides
+        
+        waitForImages().then(() => {
+            calculateDimensions();
+            // Total pages calculation is simpler now
+            totalPages = Math.ceil(slides.length / slidesPerPage);
+            
+            createNavDots();
+            updateNav();
+            updateButtonStates(); // Set initial button state
+            setupIntersectionObserver();
+            addEventListeners();
+        }).catch(err => {
+            console.error("Error waiting for images:", err);
         });
+    };
 
-        // --- Core Carousel Update Function ---
-        function updateCarousel() {
-            console.log('updateCarousel called. Current index:', currentIndex);
-            if (slides.length === 0) {
-                console.warn('No slides to update. Exiting updateCarousel.');
-                return;
-            }
+    const checkOrientation = () => {
+        isLandscape = window.matchMedia("(orientation: landscape)").matches;
+        prevButton.innerHTML = isLandscape ? prevButton.dataset.verticalIcon : prevButton.dataset.horizontalIcon;
+        nextButton.innerHTML = isLandscape ? nextButton.dataset.verticalIcon : nextButton.dataset.horizontalIcon;
+    };
 
-            const containerWidth = container.offsetWidth;
-            const activeSlide = slides[currentIndex];
-
-            if (!activeSlide) {
-                console.error("Active slide not found for index:", currentIndex, "in updateCarousel.");
-                return;
-            }
-
-            const activeSlideRect = activeSlide.getBoundingClientRect();
-            const currentSlideRelativeLeft = activeSlide.offsetLeft;
-            const desiredActiveSlideLeftInView = (containerWidth / 2) - (activeSlideRect.width / 2);
-
-            let targetOffset = -(currentSlideRelativeLeft - desiredActiveSlideLeftInView);
-
-            const trackWidth = carouselTrack.scrollWidth;
-            const maxScroll = trackWidth - containerWidth;
-            targetOffset = Math.max(-maxScroll, Math.min(0, targetOffset));
-
-            // ALWAYS enable transition for programmatic moves (arrows, dots, snap)
-            carouselTrack.style.transition = 'transform 0.5s ease-in-out';
-            carouselTrack.style.transform = `translateX(${targetOffset}px)`;
-            console.log('  Track transform set to:', carouselTrack.style.transform);
-
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-            });
-            slides[currentIndex].classList.add('active');
-            // ... (active dot updates) ...
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active');
-            });
-            if (dots[currentIndex]) {
-                dots[currentIndex].classList.add('active');
-            }
-        }
-
-        // --- Navigation Functions (goToSlide, etc. - UNCHANGED) ---
-        function goToSlide(index) {
-            console.log('goToSlide called with index:', index);
-            if (index < 0 || index >= slides.length) {
-                console.warn("Attempted to go to an invalid slide index:", index);
-                return;
-            }
-            currentIndex = index;
-            updateCarousel();
-        }
-
-        // --- Event Listeners for Buttons and Dots (UNCHANGED) ---
-        if (prevBtn) { prevBtn.addEventListener('click', () => { console.log('Prev button clicked.'); goToSlide((currentIndex === 0) ? slides.length - 1 : currentIndex - 1); }); }
-        if (nextBtn) { nextBtn.addEventListener('click', () => { console.log('Next button clicked.'); goToSlide((currentIndex === slides.length - 1) ? 0 : currentIndex + 1); }); }
-        if (dots.length > 0) {
-            dots.forEach(dot => {
-                dot.addEventListener('click', (e) => {
-                    console.log('Dot clicked. Data index:', e.target.dataset.index);
-                    const index = parseInt(e.target.dataset.index);
-                    goToSlide(index);
-                });
-            });
-        }
-        if (slides.length > 0) {
-            slides.forEach(slide => {
-                slide.addEventListener('click', () => {
-                    const clickedIndex = parseInt(slide.dataset.index);
-                    console.log('Slide clicked! Data index:', clickedIndex);
-                    goToSlide(clickedIndex);
-                });
-            });
-        }
-
-        // --- DRAG / MOUSE SCROLL FUNCTIONALITY ---
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID = 0;
-        let velocity = 0;
-        let lastPosition = 0;
-        let lastTime = 0;
-        const friction = 0.99; // Adjust: Higher = slower deceleration. Try 0.94-0.98
-        const minVelocity = 0.1; // Reduced this, as it might be stopping too early. Try 0.1-0.5
-
-
-        // Helper to get current transform X value
-        function getTranslateX(element) {
-            const style = window.getComputedStyle(element);
-            const matrix = new DOMMatrixReadOnly(style.transform);
-            return matrix.m41;
-        }
-
-        function touchStart(event) {
-            console.log('Drag started');
-            carouselTrack.style.transition = 'none'; // CRUCIAL: Disable CSS transition
-            isDragging = true;
-            startPos = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-            prevTranslate = getTranslateX(carouselTrack);
-            lastPosition = startPos;
-            lastTime = Date.now();
-            velocity = 0;
-            cancelAnimationFrame(animationID); // Stop any ongoing animation
-        }
-
-        function touchMove(event) {
-            if (!isDragging) return;
-            event.preventDefault(); // Prevent default browser scroll/drag
-            // If dragging, prevent click events from firing (for image clicks after drag)
-            container.classList.add('is-dragging'); // Add class to manage drag state (can also be for cursor style)
-
-
-            const currentPosition = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-            const currentTime = Date.now();
-            const deltaX = currentPosition - startPos;
-            currentTranslate = prevTranslate + deltaX;
-
-            const moveDelta = currentPosition - lastPosition;
-            const timeDelta = currentTime - lastTime;
-            if (timeDelta > 0) {
-                 velocity = moveDelta / timeDelta; // Pixels per millisecond
-            }
-
-            lastPosition = currentPosition;
-            lastTime = currentTime;
-
-            const trackWidth = carouselTrack.scrollWidth;
-            const containerWidth = container.offsetWidth;
-            const maxTranslateX = 0;
-            const minTranslateX = containerWidth - trackWidth;
-
-            // Apply a "pull-back" effect if dragging past ends
-            if (currentTranslate > maxTranslateX + 50) {
-                currentTranslate = maxTranslateX + 50 + (currentTranslate - (maxTranslateX + 50)) * 0.1;
-            } else if (currentTranslate < minTranslateX - 50) {
-                currentTranslate = minTranslateX - 50 + (currentTranslate - (minTranslateX - 50)) * 0.1;
-            }
-
-            carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-        }
-
-        function touchEnd(event) {
-            console.log('Drag ended. Final velocity:', velocity);
-            isDragging = false;
-            // Remove the is-dragging class
-            setTimeout(() => { // Small timeout to allow potential click event to be suppressed
-                container.classList.remove('is-dragging');
-            }, 50);
-
-
-            const trackWidth = carouselTrack.scrollWidth;
-            const containerWidth = container.offsetWidth;
-            const maxTranslateX = 0;
-            const minTranslateX = containerWidth - trackWidth;
-
-            // Handle immediate snap if overshot
-            if (currentTranslate > maxTranslateX) {
-                currentTranslate = maxTranslateX;
-                velocity = 0;
-                carouselTrack.style.transition = 'transform 0.3s ease-out'; // Smooth snap back
-                carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-                snapToNearestSlide();
-                return;
-            } else if (currentTranslate < minTranslateX) {
-                currentTranslate = minTranslateX;
-                velocity = 0;
-                carouselTrack.style.transition = 'transform 0.3s ease-out'; // Smooth snap back
-                carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-                snapToNearestSlide();
-                return;
-            }
-
-            // If within bounds, start deceleration
-            if (Math.abs(velocity) > minVelocity) {
-                animationID = requestAnimationFrame(animation);
-            } else {
-                snapToNearestSlide(); // If very slow, just snap
-            }
-        }
-
-        function animation() {
-            if (isDragging) {
-                cancelAnimationFrame(animationID); // Ensure it stops if drag starts during animation
-                return;
-            }
-
-            currentTranslate += velocity * 16.66; // Pixels per frame (velocity is px/ms, 16.66ms/frame)
-            velocity *= friction; // Apply friction
-
-            const trackWidth = carouselTrack.scrollWidth;
-            const containerWidth = container.offsetWidth;
-            const maxTranslateX = 0;
-            const minTranslateX = containerWidth - trackWidth;
-
-            // Constrain during deceleration
-            if (currentTranslate > maxTranslateX) {
-                currentTranslate = maxTranslateX;
-                velocity = 0; // Stop
-            }
-            if (currentTranslate < minTranslateX) {
-                currentTranslate = minTranslateX;
-                velocity = 0; // Stop
-            }
-
-            // Stop animation if velocity is too low or we hit boundaries
-            if (Math.abs(velocity) < minVelocity) {
-                cancelAnimationFrame(animationID);
-                snapToNearestSlide();
-                return;
-            }
-
-            // CRUCIAL: Ensure transition is 'none' during deceleration
-            carouselTrack.style.transition = 'none';
-            carouselTrack.style.transform = `translateX(${currentTranslate}px)`;
-            animationID = requestAnimationFrame(animation);
-        }
-
-        function snapToNearestSlide() {
-            console.log('Snapping to nearest slide...');
-            // This function will eventually call updateCarousel, which enables transition
-            // So we don't need to enable transition here immediately
-            // carouselTrack.style.transition = 'transform 0.3s ease-out'; // This was potentially conflicting
-
-            const currentTrackTranslateX = getTranslateX(carouselTrack);
-
-            let closestIndex = currentIndex;
-            let minDiff = Infinity;
-
-            slides.forEach((slide, index) => {
-                const slideRect = slide.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect(); // Get container's rect for consistent center
-
-                const slideCenterRelativeToTrack = slide.offsetLeft + (slideRect.width / 2);
-
-                const desiredTranslateX = (containerRect.width / 2) - slideCenterRelativeToTrack;
-
-                const diff = Math.abs(currentTrackTranslateX - desiredTranslateX);
-
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    closestIndex = index;
-                }
-            });
-
-            if (closestIndex !== currentIndex) {
-                goToSlide(closestIndex);
-            } else {
-                 updateCarousel(); // Re-center current slide, will apply transition
-            }
-        }
-
-
-        // Attach Mouse and Touch listeners
-        carouselTrack.addEventListener('mousedown', touchStart);
-        document.addEventListener('mouseup', touchEnd); // Listen on document
-        carouselTrack.addEventListener('mouseleave', (event) => {
-            if (isDragging) touchEnd(event);
+    const calculateDimensions = () => {
+        let offset = 0;
+        slideOffsets = slides.map(slide => {
+            const currentOffset = offset;
+            const rect = slide.getBoundingClientRect();
+            const margin = isLandscape ? 4 : 20;
+            offset += (isLandscape ? rect.height : rect.width) + margin;
+            return currentOffset;
         });
-        carouselTrack.addEventListener('mousemove', touchMove);
+    };
 
-        carouselTrack.addEventListener('touchstart', touchStart);
-        carouselTrack.addEventListener('touchend', touchEnd);
-        carouselTrack.addEventListener('touchcancel', touchEnd);
-        carouselTrack.addEventListener('touchmove', touchMove);
+    // --- NAVIGATION & MOVEMENT ---
+    const moveToPage = (pageIndex) => {
+        // Boundary check: Do not move if the page is out of bounds
+        if (pageIndex < 0 || pageIndex >= totalPages) {
+            return;
+        }
 
-        // Prevent dragging images from starting native drag behavior / prevent clicks immediately after drag
+        currentPage = pageIndex;
+        // Find the offset of the first slide of the target page
+        const targetIndex = currentPage * slidesPerPage;
+        if (targetIndex >= slideOffsets.length) return; // Safeguard
+
+        currentTranslate = -slideOffsets[targetIndex];
+        setTrackPositionWithAnimation();
+        updateNav();
+        updateButtonStates();
+    };
+    
+    // NEW: Function to disable/enable arrow buttons
+    const updateButtonStates = () => {
+        prevButton.disabled = currentPage === 0;
+        nextButton.disabled = currentPage === totalPages - 1;
+    };
+
+    const setTrackPosition = () => {
+        const transformValue = isLandscape ? `translateY(${currentTranslate}px)` : `translateX(${currentTranslate}px)`;
+        track.style.transform = transformValue;
+    };
+
+    const setTrackPositionWithAnimation = () => {
+        track.style.transition = 'transform 0.5s ease-out';
+        setTrackPosition();
+    };
+
+    const updateNav = () => {
+        Array.from(nav.children).forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === currentPage);
+        });
+    };
+    
+    const createNavDots = () => {
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            dot.addEventListener('click', () => moveToPage(i));
+            nav.appendChild(dot);
+        }
+    };
+    
+    // --- DRAG/SWIPE LOGIC ---
+    const getPosition = (e) => isLandscape 
+        ? (e.type.includes('mouse') ? e.pageY : e.touches[0].clientY)
+        : (e.type.includes('mouse') ? e.pageX : e.touches[0].clientX);
+
+    const dragStart = (e) => {
+        isDragging = true;
+        startPos = getPosition(e);
+        prevTranslate = currentTranslate;
+        animationID = requestAnimationFrame(animation);
+        track.style.transition = 'none';
+    };
+
+    const dragMove = (e) => {
+        if (isDragging) {
+            const currentPosition = getPosition(e);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+        }
+    };
+
+    const dragEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+        const movedBy = currentTranslate - prevTranslate;
+
+        // Snap to the next or previous page, respecting boundaries
+        if (movedBy < -100 && currentPage < totalPages - 1) {
+            moveToPage(currentPage + 1);
+        } else if (movedBy > 100 && currentPage > 0) {
+            moveToPage(currentPage - 1);
+        } else {
+            // Snap back to the current page if not dragged far enough
+            moveToPage(currentPage);
+        }
+    };
+
+    const animation = () => {
+        setTrackPosition();
+        if (isDragging) requestAnimationFrame(animation);
+    };
+
+    // --- EVENT HANDLERS & OBSERVERS ---
+    const addEventListeners = () => {
+        prevButton.onclick = () => moveToPage(currentPage - 1);
+        nextButton.onclick = () => moveToPage(currentPage + 1);
+        track.onmousedown = dragStart;
+        track.ontouchstart = dragStart;
+        track.onmousemove = dragMove;
+        track.ontouchmove = dragMove;
+        document.onmouseup = dragEnd;
+        document.ontouchend = dragEnd;
+        track.onmouseleave = () => isDragging && dragEnd();
+        
         slides.forEach(slide => {
             const img = slide.querySelector('img');
-            if (img) img.ondragstart = () => false;
-            // Prevent click event on slide if it was a drag
-            slide.addEventListener('click', (e) => {
-                // If a drag just happened (checked via a class), prevent click
-                if (container.classList.contains('is-dragging')) {
-                    e.preventDefault();
-                    e.stopPropagation(); // Stop propagation to prevent parent clicks
-                } else {
-                    const clickedIndex = parseInt(slide.dataset.index);
-                    console.log('Slide clicked! Data index:', clickedIndex);
-                    goToSlide(clickedIndex);
-                }
-            }, true); // Use capture phase for the click event
+            if (img) img.addEventListener('click', handleSlideClick);
         });
+    };
 
+    const handleSlideClick = (e) => {
+        e.stopPropagation(); 
+        const clickedSlide = e.currentTarget.closest('.carousel-slide');
+        if(activeSlide) activeSlide.classList.remove('is-active');
+        activeSlide = (activeSlide === clickedSlide) ? null : clickedSlide;
+        if(activeSlide) activeSlide.classList.add('is-active');
+    };
 
-        // Initial carousel update
-        updateCarousel();
+    const setupIntersectionObserver = () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('is-visible', entry.isIntersecting);
+                if (activeSlide && entry.target === activeSlide && !entry.isIntersecting) {
+                    activeSlide.classList.remove('is-active');
+                    activeSlide = null;
+                }
+            });
+        }, { root: carouselContainer, threshold: 0.1 });
+        slides.forEach(slide => observer.observe(slide));
+    };
+    
+    // --- START & RESIZE ---
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        // A full rebuild is still the most reliable way to handle orientation changes
+        resizeTimer = setTimeout(initializeCarousel, 250);
     });
-};
+
+    const waitForImages = () => {
+        const images = Array.from(track.querySelectorAll('img'));
+        const promises = images.map(img => {
+            return new Promise((resolve, reject) => {
+                if (img.complete) return resolve();
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+        });
+        return Promise.all(promises);
+    };
+
+    // Initial call to set everything up
+    initializeCarousel();
+});

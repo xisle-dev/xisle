@@ -21,11 +21,15 @@
     {{ partial "main.css.html" . }}
   
     {{- $options := dict "targetPath" "js/bundle.js" -}}
-    {{- $jsBundle := resources.Match "/js/**.js" | resources.Concat "combined.js" | js.Build $options | resources.Minify | fingerprint -}}
-
-
+    {{- $res := slice }}
+    {{ range (slice "/js/carousel.js" "/js/main.js" )}}
+      {{ warnf "Processing resource: %s" . }}
+      {{ $res = $res | append (resources.Get .) }}
+    {{ end }}
+    {{- $jsBundle := ($res | resources.Concat "combined.js" | js.Build $options | resources.Minify | fingerprint) -}}
   </head>
   <body>
+    
     <div id="cesiumContainer" class="absolute inset-0 z-0"></div>
     <div class="overlay">
       {{ block "main" . }}

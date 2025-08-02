@@ -1,190 +1,199 @@
-/* Base Container Styles */
-.carousel-container {
+/* --- BASE STYLES --- */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* NEW: Style for the main component wrapper */
+.carousel-wrapper {
+    display: flex;
+    /* This will be changed by media queries */
+    flex-direction: column;
+    align-items: center;
     pointer-events: none;
-    position: absolute;
-    width: 100%;
-    overflow: hidden; /* This is crucial for hiding overflowed slides */
-    margin: 20px 0;
-    min-height: 120px; /* Base min-height for controls/padding */
-    display: flex; /* Helps vertically center the track */
-    align-items: center; /* Vertically centers the track within the container */
+}
+
+.carousel-container {
+    overflow: hidden;
+    user-select: none;
+    position: relative;
 }
 
 .carousel-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    height: 100%; /* Ensure track fills container height */
-    align-items: center; /* Vertically center images within the track */
-    flex-wrap: nowrap; /* Crucial: ensures items don't wrap and overflow horizontally */
-    justify-content: flex-start; /* Default alignment */
-}
-
-/* Base Slide Styles (for all screens) */
-.carousel-slide {
-    pointer-events: all;
-    display: flex;
-    border-radius: 10px;
-    justify-content: center; /* Horizontally center image in its slide */
-    align-items: center;     /* Vertically center image in its slide */
-    overflow: hidden;
     position: relative;
-    box-sizing: border-box;
-    transition: border-width 0.5s ease-in-out; /* Removed margin from transition, as gap handles it */
-    flex-grow: 0;
-    flex-shrink: 0; /* Important: Prevents slides from shrinking below their content size */
-    flex-basis: auto; /* This makes the slide's width determined by its content */
-    margin: 0 10px;
-    border-width: 2px;
-    border-color: black
 }
 
-.carousel-slide.active {
-    border-width: 5px;
+.carousel-slide {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, border 0.3s ease, opacity 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.carousel-slide.is-visible {
+    opacity: 1;
+}
+
+.carousel-slide.is-active img {
     border-color: white;
-    z-index: 1; /* Bring active image to front */
+    z-index: 10;
 }
 
 .carousel-slide img {
-    max-width: 100%; /* Image fills its slide container */
-    max-height: 100%; /* Image fills its slide container */
-    object-fit: contain; /* Maintain aspect ratio and fit within the container */
+    max-width: none;
     display: block;
-    box-sizing: border-box;
-    transition: all 0.5s ease-in-out; /* For smooth image resizing */
-}
-
-.carousel-caption {
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for readability */
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: white;
-    padding: 10px 20px; /* Adjusted padding for buttons */
-    box-sizing: border-box;
-    font-size: 1.2em;
-    font-weight:600;
-    /* Flexbox for layout */
-    display: flex;
-    justify-content: space-between; /* Pushes items to ends and center */
-    align-items: center; /* Vertically aligns items */
-  }
-  
-  /* New class for the caption text */
-  .caption-text {
-    text-align: center;
-    flex-grow: 1; /* Allows text to take up available space */
-    pointer-events: none; /* Makes text non-interactive */
-  }
-  
-  /* New class for the transparent buttons */
-  .caption-btn {
-    background: transparent;
-    border: none;
-    padding: 5px;
+    object-fit: cover;
+    border-radius: 4px;
     cursor: pointer;
-    color: white; /* SVG icon will inherit this color */
-    line-height: 0; /* Helps with icon alignment */
-  }
-
-  .slide-content-wrapper {
-    position: relative;
-    display: flex; /* This helps center the content if needed */
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-
-/* Media Queries for Image Sizing and Container Height */
-
-/* < 600px (Small Screens) */
-@media (max-width: 599px) {
-    .carousel-container {
-        min-height: 120px;
-    }
-    .carousel-slide img {
-        height: 100px; /* Target actual image height */
-        width: auto;   /* Width adjusts proportionally */
-    }
-    .carousel-track {
-        /* No specific justify-content needed here, as JS handles centering */
-    }
+    border: 5px solid transparent;
+    pointer-events: auto;
 }
 
-/* 600px - 1024px (Medium Screens) */
-@media (min-width: 600px) and (max-width: 1024px) {
-    .carousel-container {
-        min-height: 220px; /* Base for 200px images + padding/controls */
-    }
-    .carousel-slide img {
-        height: 200px; /* Target actual image height */
-        width: auto;   /* Width adjusts proportionally */
-    }
-    .carousel-track {
-        /* No specific justify-content needed here, as JS handles centering */
-    }
-}
-
-/* > 1024px (Large Screens) */
-@media (min-width: 1025px) {
-    .carousel-container {
-        min-height: 320px; /* Min height for 300px images */
-    }
-    .carousel-slide img {
-        height: 300px; /* Target actual image height */
-        width: auto;   /* Width adjusts proportionally */
-    }
-    .carousel-track {
-        /* No specific justify-content needed here, as JS handles centering */
-    }
-}
-
-
-/* Navigation Buttons */
-.carousel-prev-btn,
-.carousel-next-btn {
+.carousel-arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 10px 15px;
+    font-size: 2rem;
     cursor: pointer;
-    z-index: 10;
-    font-size: 1.5em;
+    z-index: 20;
     border-radius: 5px;
+    transition: background-color 0.2s ease;
+    pointer-events: auto;
 }
 
-.carousel-prev-btn {
-    left: 10px;
+.carousel-arrow:disabled {
+    display: none;
 }
 
-.carousel-next-btn {
-    right: 10px;
+.carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Dots Navigation */
-.carousel-dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+/* UPDATED: Nav dots are now a flex item, not absolutely positioned */
+.carousel-nav {
     display: flex;
-    gap: 8px;
-    z-index: 10;
+    gap: 15px;
 }
 
-.carousel-dots .dot {
+.carousel-dot {
     width: 12px;
     height: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
+    /* A slightly darker color for better visibility on a light background */
+    background-color: #ccc; 
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
+    pointer-events: all;
 }
 
-.carousel-dots .dot.active {
-    background-color: rgba(255, 255, 255, 1);
+.carousel-dot:hover {
+    background-color: #aaa;
+}
+
+.carousel-dot.is-active {
+    background-color: #333;
+}
+
+
+/* --- MEDIA QUERIES --- */
+
+/* 🌄 Landscape: Wider than tall -> Dots on the left */
+@media (orientation: landscape) {
+    .carousel-wrapper {
+        flex-direction: row;
+        justify-content: flex-start; /* This aligns it to the left */
+    }
+
+    .carousel-container {
+        width: 200px;
+        height: 99vh; /* Adjust height as needed */
+        border-radius: 10px;
+    }
+    .carousel-track {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+    .carousel-slide {
+        width: 100%;
+        height: auto;
+        padding: 0 10px;
+        margin: 2px 0;
+    }
+    .carousel-slide img {
+        width: 100%;
+        height: auto;
+    }
+    .prev-arrow {
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.2rem 1rem;
+    }
+    .next-arrow {
+        top: auto;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.2rem 1rem;
+    }
+    
+    /* UPDATED: Dots on the left of the container */
+    .carousel-nav {
+        flex-direction: column;
+        margin-right: 5px; /* Space between dots and carousel */
+    }
+}
+
+
+/* 🏙️ Portrait: Taller than wide -> Dots below */
+@media (orientation: portrait) {
+    .carousel-wrapper {
+        flex-direction: column; /* Arrange items top-to-bottom */
+    }
+
+    .carousel-container {
+        width: 100%;
+        height: 150px;
+        border-radius: 0;
+    }
+    .carousel-track {
+        flex-direction: row;
+        height: 100%;
+    }
+    .carousel-slide {
+        height: 100%;
+        width: auto;
+        margin: 0 10px;
+        padding: 10px 0;
+    }
+    .carousel-slide img {
+        height: 100%;
+        width: auto;
+    }
+    .prev-arrow {
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        padding: 0.5rem 1rem;
+    }
+    .next-arrow {
+        top: 50%;
+        right: 15px;
+        left: auto;
+        transform: translateY(-50%);
+        padding: 0.5rem 1rem;
+    }
+
+    /* UPDATED: Dots below the container */
+    .carousel-nav {
+        flex-direction: row;
+        margin-top: 5px; /* Space between carousel and dots */
+    }
 }

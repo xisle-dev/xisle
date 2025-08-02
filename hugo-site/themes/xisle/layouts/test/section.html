@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .list {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item {
+            background-color: lightgreen;
+            border: 5px solid blue;
+            border-radius: 10px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .item.active {
+            border-width: 5px;
+            border-color: white;
+            z-index: 1; /* Bring active image to front */
+        }
+        
+        .item img {
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        @media (orientation: landscape) {
+            .list  {
+              flex-direction: column; /* Stack items vertically */
+              align-items: flex-start; /* Align items to the left edge */
+            }
+          
+          }
+          
+          /* Styles for when the viewport is HIGHER than it is WIDE (Portrait orientation) */
+          /* This can be achieved with (orientation: portrait) or by setting a specific aspect ratio */
+          @media (orientation: portrait) {
+            .list {
+              flex-direction: row; /* Keep items in a row (default for horizontal carousel) */
+              align-items: flex-start; /* Align items to the top edge */
+              /* If you want a horizontal scrollable carousel in portrait, you might add: */
+              overflow-x: auto;
+              white-space: nowrap; /* Prevent items from wrapping */
+            }
+          
+          }        
+    </style>
+</head>
+<body>
+    <div class="list">List Start
+    </div>
+</body>
+</html>

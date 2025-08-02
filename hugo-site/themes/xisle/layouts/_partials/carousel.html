@@ -5,7 +5,6 @@
   <div class="carousel-track">
     {{ range $index, $imageDef := $imageDefs }}
       {{ if eq $imageDef.image.ResourceType "image"  }}
-        {{ warnf "Hello" }}
         {{ $image := $imageDef.image.Resize "x300" }} 
         {{ $smallImagePortrait := $imageDef.image.Resize "x100" }}  {{/* For screens < 600px, 100px height */}}
         {{ $mediumImagePortrait := $imageDef.image.Resize "x200" }} {{/* For screens 600px - 1024px, 200px height */}}

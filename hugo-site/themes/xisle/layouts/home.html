@@ -1,12 +1,36 @@
 {{ define "main" }}
-<div id="nav" hx-trigger="load" hx-get="/areas/slides.html" hx-swap="innerHTML">
+{{ $asset := resources.Get "/images/Dallas Road/dallas-road.jpg" }}
+{{ $img := $asset.Fit "600x400" }}
+{{ $asset2 := resources.Get "/images/Dallas Road/WhatsApp Image 2025-04-15 at 22.33.09_88258c65 copy.jpg" }}
+{{ $img2 := $asset2.Fit "600x400" }}
 
+
+<div class="carousel-wrapper">
+  <div class="carousel-container">
+    <div class="carousel-track">
+      {{ range seq 20}}
+      <div class="carousel-slide">
+        <img src="{{ $img.RelPermalink }}" class="" loading="lazy" alt="...">
+      </div>
+      <div class="carousel-slide">
+        <img src="{{ $img2.RelPermalink }}" class="" loading="lazy" alt="...">
+      </div>
+  {{ end }}
+    </div>
+
+    <button class="carousel-arrow prev-arrow" aria-label="Previous page" data-horizontal-icon="&#10094;" data-vertical-icon="&#9650;">&#10094;</button>
+    <button class="carousel-arrow next-arrow" aria-label="Next page" data-horizontal-icon="&#10095;" data-vertical-icon="&#9660;">&#10095;</button>
+
+  </div>
+  <div class="carousel-nav"></div>
+</div>
+{{/*  <div id="nav" hx-trigger="load" hx-get="/areas/slides.html" hx-swap="innerHTML">
 </div>
 <div class="absolute bottom-0 left-0 bg-white-300 bg-opacity-75 widget" id="summary">Details</div>
 <div class="absolute bottom-0 right-0 bg-white-300 bg-opacity-75 widget">
   <p><strong>Latitude:</strong> <span id="latitude">N/A</span></p>
   <p><strong>Longitude:</strong> <span id="longitude">N/A</span></p>
   <p><strong>Altitude:</strong> <span id="altitude">N/A</span></p>
-</div>
+</div>  */}}
 
 {{ end }}
